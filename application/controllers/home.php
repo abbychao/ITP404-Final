@@ -31,11 +31,28 @@ class Home_Controller extends Base_Controller {
 	*/
 
 	public function action_index() {
-		$roster = Roster::all();
-		Linkedin::getProfile();
+		// echo Linkedin::getAuthURL();
+		 Linkedin::getProfileById(3, $_REQUEST['oauth_verifier']);
+		// Linkedin::updateAllProfiles();
+		$input = Input::all();
+		$query = null;
+
+		// If directed from authentication flow, log keys
+		if(isset($input['oauth_verifier'])) {
+			$oauth_verifier = ($input['oauth_verifier']);
+		}
+
+		// If directed from search page, display results
+		if(!isset($input['from_search'])) {
+			$roster = Roster::all();
+		}
+		else {
+			$roster = Roster::getByQuery($input);
+			$query = Roster::formatInput($input);
+		}
 
 		$data = array(
-			'test' => 'hello',
+			'query' => $query,
 			'results' => $roster
 		);
 
@@ -46,7 +63,6 @@ class Home_Controller extends Base_Controller {
 		$data = array(
 			'options' => Roster::getOptions()
 		);
-
 		return View::make('home.add', $data);
 	}
 
@@ -56,6 +72,32 @@ class Home_Controller extends Base_Controller {
 			'input' => Input::all()
 		);
 		return View::make('home.added', $data);
+	}
+
+	public function action_edit() {
+		$data = array(
+			'bro' => Roster::getBrother($_REQUEST['bro_id']),
+			// 'input' => Input::all(),
+			'options' => Roster::getOptions()
+		);
+		return View::make('home.edit', $data);
+	}
+
+	public function action_edited() {
+		Roster::edit(Input::all());
+		$data = array('input' => Input::all());
+		return View::make('home.edited', $data);
+	}
+
+	public function action_delete() {
+		$data = array('name' => Roster::getNameById($_REQUEST['bro_id']));
+		Roster::delete($_REQUEST['bro_id']);
+		return View::make('home.delete', $data);
+	}
+
+	public function action_search() {
+		$data = array('options' => Roster::getOptions());
+		return View::make('home.search', $data);
 	}
 
 }
