@@ -137,7 +137,6 @@ class Roster {
 		$results = $query->get(array('roster.*','family_name','status.status_id','status_name',
 			'grad_sem.semester_name AS grad_sem','pc_sem.semester_name AS pc_sem'));
 		$results = $results[0];
-
 		return $results;
 	}
 

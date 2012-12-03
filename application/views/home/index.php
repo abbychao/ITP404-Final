@@ -1,4 +1,3 @@
-<!doctype html>
 <html>
 <head>
 	<title>Delta Sigma Pi Roster</title>
@@ -7,6 +6,13 @@
 <body>
 	<h1>Delta Sigma Pi Roster</h1>
 	<p>
+		<span><?php 
+			if($loggedin) {
+				echo 'Currently logged in.';
+			} else {
+				echo 'Not currently logged in. <a href="'.$login_url.'">Login now.</a>';
+			}
+		?></span>
 		<span><?php echo $query ?></span><br>
 		<span><?php echo count($results) ?> records shown.</span><br>
 		<a href="<?php echo URL::to('home/search') ?>">Search for Members</a> | 

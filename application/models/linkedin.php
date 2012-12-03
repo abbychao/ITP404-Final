@@ -3,30 +3,55 @@
 class Linkedin {
 	private static $api_key = 'nrip06wg8d7p';
 	private static $secret_key = 'yo0Jsuxbf7GgA1ra';
-	private static $oauth_token = '97337796-4f7f-4bc9-9cbd-987399f9aa56';
-	private static $oauth_secret = '73d7bf90-f1be-4998-8f25-6981970aa09b';
-	public $oauth_verifier = null;
+	private $request_token;
+	private $access_token;
+	public $oauth;
+	public $loggedin = FALSE;
 
-	public static function getAuthURL() {
-		$consumer = new OAuth(static::$api_key, static::$secret_key);
+	public function __construct($api_key, $secret_key) {
+		$this->oauth = new OAuth($api_key, $secret_key);
+	}
+
+	public static function start() {
+		if(!isset($_SESSION['linkedin'])) {
+			$_SESSION['linkedin'] = new Linkedin(static::$api_key, static::$secret_key);
+		}
+	}
+
+	public function getAuthURL() {
 		$request_url = 'https://api.linkedin.com/uas/oauth/requestToken';
 		$callback_url = URL::to('home/index');
-		$request_token = $consumer->getRequestToken($request_url, $callback_url);
-		$url = 'https://api.linkedin.com/uas/oauth/authorize?oauth_token='.$request_token['oauth_token'];
+		if(!isset($this->request_token)){
+			$this->request_token = $this->oauth->getRequestToken($request_url, $callback_url);
+		}
+		$url = 'https://api.linkedin.com/uas/oauth/authorize?oauth_token='.$this->request_token['oauth_token'];
 		return $url;
 	}
 
-	public static function getProfileById($id, $oauth_verifier = null) {
-		// Fill the keys and secrets you retrieved after registering your app
+	public function validate($oauth_verifier) {
 		$oauth = new OAuth(static::$api_key, static::$secret_key);
-		$oauth->setToken(static::$oauth_token, static::$oauth_secret);
-		$access_token_info = $oauth->getAccessToken('https://api.linkedin.com/uas/oauth/accessToken', '', $oauth_verifier);
-	    if(!empty($access_token_info)) {
-	        print_r($access_token_info);
-	    } else {
-	        print "Failed fetching access token, response was: " . $oauth->getLastResponse();
-	    }
-	    exit();
+		$oauth->setToken(
+			$_SESSION['linkedin']->request_token['oauth_token'], 
+			$_SESSION['linkedin']->request_token['oauth_token_secret']
+		);
+
+		$access_token_url = 'https://api.linkedin.com/uas/oauth/accessToken';
+		$access_token_response = $oauth->getAccessToken($access_token_url, '', $oauth_verifier);
+		 
+		if($access_token_response === FALSE) {
+		        throw new Exception("Failed fetching request token, response was: " . $oauth->getLastResponse());
+		} else {
+		        $this->access_token = $access_token_response;
+		        $this->loggedin = TRUE;
+		}
+	}
+
+	public function getProfileById($id) {
+		$oauth = new OAuth(static::$api_key, static::$secret_key);
+		$oauth->setToken(
+			$_SESSION['linkedin']->request_token['oauth_token'], 
+			$_SESSION['linkedin']->request_token['oauth_token_secret']
+		);
 
 		$params = array();
 		$headers = array();
@@ -37,7 +62,6 @@ class Linkedin {
 		$pub_prof_url = urlencode($pub_prof_url);
 		$url = "http://api.linkedin.com/v1/people/url=$pub_prof_url";
 		$url .= ":(first-name,last-name,headline,location:(name),industry,picture-url)";
-		// dd($url);
 
 		// By default, the LinkedIn API responses are in XML format. If you prefer JSON, simply specify the format in your call
 		// $url = "http://api.linkedin.com/v1/people/~?format=json";
@@ -54,7 +78,7 @@ class Linkedin {
 		return $results;
 	}
 
-	public static function updateProfile($id, $details) {
+	public function updateProfile($id, $details) {
 		DB::table('roster')->where('bro_id','=', $id)
 			->update(array(
 				'headline' => $details->headline,
