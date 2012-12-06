@@ -1,8 +1,10 @@
 <html>
 <head>
 	<title>Edit Member Profile</title>
+	<link rel="stylesheet" type="text/css" href="<?php echo URL::to_asset('css/home.css') ?>">
 </head>
 <body>
+	@include('home.header')
 	<h1>Edit Member Profile</h1>
 	<form action="<?php echo URL::to('home/edited') ?>" method="post">
 		<input type='hidden' name='bro_id' value='<?php echo $bro->bro_id ?>'>
@@ -40,12 +42,13 @@
 		Big Bro: <select name='bigbro_id'>
 			<option name='bigbro_id' value='<?php echo $bro->bigbro_id ?>'><?php echo Roster::getNameById($bro->bigbro_id) ?></option>
 			<option name='bigbro_id' value='0'></option>
-			<?php foreach ($options['roster'] as $bro) : ?>
-				<option name='bigbro_id' value='<?php echo $bro->bro_id ?>'><?php echo $bro->bro_fname.' '.$bro->bro_lname ?></option>
+			<?php foreach ($options['roster'] as $bigbro) : ?>
+				<option name='bigbro_id' value='<?php echo $bigbro->bro_id ?>'><?php echo $bigbro->bro_fname.' '.$bigbro->bro_lname ?></option>
 			<?php endforeach ?>
 		</select><br>
 		LinkedIn: <input type='text' name='linkedin' value='<?php echo $bro->linkedin ?>' /><br>
 		<input type="submit" value="Submit Edits" />
 	</form>
+	@include('home.footer')
 </body>
 </html>

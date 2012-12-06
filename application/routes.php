@@ -34,6 +34,14 @@
 
 Route::controller('home');
 
+// Route::get('add', function() {
+// 	return View::make('home.add');
+// });
+
+// Route::post('added', function() {
+
+// });
+
 Route::get('/', function()
 {
 	return View::make('home.index');

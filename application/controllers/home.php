@@ -32,10 +32,6 @@ class Home_Controller extends Base_Controller {
 
 	public function action_index() {
 		session_start();
-		Linkedin::start();
-
-		$_SESSION['linkedin']->getProfileById(2);
-		// Linkedin::updateAllProfiles();
 		$input = Input::all();
 		$query = null;
 
@@ -47,18 +43,46 @@ class Home_Controller extends Base_Controller {
 			$roster = Roster::getByQuery($input);
 			$query = Roster::formatInput($input);
 		}
-		if(isset($input['oauth_verifier']) && !$_SESSION['linkedin']->loggedin) {
-			$_SESSION['linkedin']->validate($input['oauth_verifier']);
+
+		$data = array(
+			'query' => $query,
+			'results' => $roster,
+			'options' => Roster::getOptions()
+		);
+
+		return View::make('home.index', $data);
+	}
+
+	public function action_admin() {
+		session_start();
+		$input = Input::all();
+		$query = null;
+
+		// If directed from search page, display results
+		if(!isset($input['from_search'])) {
+			$roster = Roster::all();
+		}
+		else {
+			$roster = Roster::getByQuery($input);
+			$query = Roster::formatInput($input);
 		}
 
 		$data = array(
 			'query' => $query,
 			'results' => $roster,
-			'loggedin' => $_SESSION['linkedin']->loggedin,
-			'login_url' => $_SESSION['linkedin']->getAuthURL()
+			'options' => Roster::getOptions()
+
 		);
 
-		return View::make('home.index', $data);
+		if(isset($input['pass'])) {
+			Admin::verifyPass($input['pass']);
+		}
+		if($_SESSION['admin']) {
+			return View::make('home.index', $data);
+		} 
+		else {
+			return View::make('home.admin', $data);
+		}
 	}
 
 	public function action_add() {
@@ -71,9 +95,24 @@ class Home_Controller extends Base_Controller {
 
 	public function action_added() {
 		session_start();
-		Roster::add(Input::all());
+
+		$input = Input::all();
+		$rules = array(
+			'fname' => 'required',
+			'lname' => 'required',
+			'pc_year' => 'integer|size:4|between:1922,3000',
+			'grad_year' => 'integer|size:4|between:1922,3000',
+			'linkedin' => 'active_url'
+		);
+		$validation = Validator::make($input, $rules);
+		if($validation->fails()) {
+			return Redirect::to('home/add')->with_errors($validation);
+		}
+
+		Roster::add($input);
 		$data = array(
-			'input' => Input::all()
+			'input' => $input,
+			'options' => Roster::getOptions()
 		);
 		return View::make('home.added', $data);
 	}
@@ -90,14 +129,32 @@ class Home_Controller extends Base_Controller {
 
 	public function action_edited() {
 		session_start();
-		Roster::edit(Input::all());
-		$data = array('input' => Input::all());
+		$input = Input::all();
+		$rules = array(
+			'fname' => 'required',
+			'lname' => 'required',
+			'pc_year' => 'integer|size:4|between:1922,3000',
+			'grad_year' => 'integer|size:4|between:1922,3000',
+			'linkedin' => 'active_url'
+		);
+		$validation = Validator::make($input, $rules);
+		// if($validation->fails()) {
+		// 	return Redirect::to('home/edit')->with_errors($validation);
+		// }
+		Roster::edit($input);
+		$data = array(
+			'input' => $input,
+			'options' => Roster::getOptions()
+		);
 		return View::make('home.edited', $data);
 	}
 
 	public function action_delete() {
 		session_start();
-		$data = array('name' => Roster::getNameById($_REQUEST['bro_id']));
+		$data = array(
+			'name' => Roster::getNameById($_REQUEST['bro_id']),
+			'options' => Roster::getOptions()
+		);
 		Roster::delete($_REQUEST['bro_id']);
 		return View::make('home.delete', $data);
 	}
@@ -106,6 +163,37 @@ class Home_Controller extends Base_Controller {
 		session_start();
 		$data = array('options' => Roster::getOptions());
 		return View::make('home.search', $data);
+	}
+
+	public function action_view() {
+		session_start();
+		$bro_id = $_REQUEST['bro_id'];
+		Linkedin::getProfileById($bro_id);
+		$data = array(
+			'bro' => Roster::getBrother($bro_id),
+			'options' => Roster::getOptions()
+		);
+		return View::make('home.view', $data);
+	}
+
+	public function action_map() {
+		session_start();
+		$data = array('options' => Roster::getOptions());
+		return View::make('home.map', $data);
+	}
+
+	public function action_map_ajax() {
+		echo json_encode(Roster::all());
+	}
+
+	public function action_family() {
+		session_start();
+		$data = array('options' => Roster::getOptions());
+		return View::make('home.family', $data);
+	}
+
+	public function action_family_ajax() {
+		echo json_encode(Family::getMembers($_REQUEST['family_id']));
 	}
 
 }

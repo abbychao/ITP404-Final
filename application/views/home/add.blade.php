@@ -1,28 +1,32 @@
 <html>
 <head>
-	<title>Search for Members</title>
+	<title>Add New Member</title>
+	<link rel="stylesheet" type="text/css" href="<?php echo URL::to_asset('css/home.css') ?>">
 </head>
 <body>
-	<h1>Search for Member</h1>
-	<form action="<?php echo URL::to('home/index') ?>" method="post">
-		<input type='hidden' name='from_search' value='1'>
+@include('home.header')
+<div id='container'>
+	<h1>Add New Member</h1>
+	{{ $errors->has('fname') ? 'Please enter a first name.<br>' : ''}}
+	{{ $errors->has('lname') ? 'Please enter a last name.<br>' : '' }}
+	{{ $errors->has('pc_year') ? 'Please enter a 4-digit pledge year.<br>' : '' }}
+	{{ $errors->has('grad_year') ? 'Please enter a 4-digit graduation year.<br>' : '' }}
+	{{ $errors->has('linkedin') ? 'Please enter a valid LinkedIn URL.<br>' : '' }}
+	<form action="<?php echo URL::to('home/added') ?>" method="post">
 		First Name: <input type='text' name='fname' /><br>
 		Last Name: <input type='text' name='lname' /><br>
 		Status: <select name='status_id'>
-			<option name='status_id' value=''><option>
 			<?php foreach ($options['statuses'] as $status) : ?>
 				<option name='status_id' value='<?php echo $status->status_id ?>'><?php echo $status->status_name ?></option>
 			<?php endforeach ?>
 		</select><br>
 		Pledge Class: <select name='pc_sem_id'>
-			<option name='pc_sem_id' value=''></option>
 			<?php foreach ($options['semesters'] as $semester) : ?>
 				<option name='pc_sem_id' value='<?php echo $semester->semester_id ?>'><?php echo $semester->semester_name ?></option>
 			<?php endforeach ?>
 		</select>
 		<input type='text' name='pc_year'><br>
 		Graduation: <select name='grad_sem_id'>
-			<option name='grad_sem_id' value=''></option>
 			<?php foreach ($options['semesters'] as $semester) : ?>
 				<option name='grad_sem_id' value='<?php echo $semester->semester_id ?>'><?php echo $semester->semester_name ?></option>
 			<?php endforeach ?>
@@ -40,7 +44,9 @@
 			<?php endforeach ?>
 		</select><br>
 		LinkedIn: <input type='text' name='linkedin' /><br>
-		<input type="submit" value="Search" />
+		<input type="submit" value="Add New Member" />
 	</form>
+</div>
+@include('home.footer')
 </body>
 </html>

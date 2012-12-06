@@ -53,7 +53,7 @@ class Roster {
 		AND roster.pc_sem_id = pc_sem.semester_id';
 
 		// Adding Search Clauses
-		if(!empty($data['fname'])) {
+		if(isset($data['fname'])) {
 			$sql .= ' AND roster.bro_fname LIKE "%'.$data['fname'].'%"';
 		}
 		if(!empty($data['lname'])) {
@@ -80,7 +80,12 @@ class Roster {
 		if(!empty($data['status_id'])) {
 			$sql .= ' AND roster.status_id = '.$data['status_id'];
 		}
-
+		if(!empty($data['industry'])) {
+			$sql .= ' AND roster.industry = "'.$data['industry'].'"';
+		}
+		if(!empty($data['location'])) {
+			$sql .= ' AND roster.location = "'.$data['location'].'"';
+		}
 		$results = DB::query($sql);
 		return $results;
 	}
@@ -90,14 +95,23 @@ class Roster {
 			$desc = "<i>Showing all results.</i>";
 		}
 		else{
-			$desc = "<i>Showing results for...</i>";
-			$desc .= "<br>First Name: ".$data['fname'];
-			$desc .= "<br>Last Name: ".$data['lname'];
-			$desc .= "<br>Graduated: ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
-			$desc .= "<br>Pledged: ".Roster::getSemById($data['pc_sem_id'])." ".$data['pc_year'];
-			$desc .= "<br>Big Bro: ".Roster::getNameById($data['bigbro_id']);
-			$desc .= "<br>Family: ".Roster::getFamilyById($data['family_id']);
-			$desc .= "<br>Status: ".Roster::getStatusById($data['status_id']);
+			$desc = "<i>Showing results for...</i><br>";
+			if(!empty($data['fname'])) { $desc .= "<br>First Name: ".$data['fname']; }
+			if(!empty($data['lname'])) { $desc .= "<br>Last Name: ".$data['lname']; }
+			if(!empty($data['grad_sem_id']) or !empty($data['grad_year'])) { 
+				$desc .= "<br>Graduated: ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
+			}
+			if(!empty($data['pc_sem_id']) or !empty($data['pc_year'])) { 
+				$desc .= "<br>Pledged: ".Roster::getSemById($data['pc_sem_id'])." ".$data['pc_year']; 
+			}
+			if(!empty($data['bigbro_id'])) { $desc .= "<br>Big Bro: ".Roster::getNameById($data['bigbro_id']); }
+			if(!empty($data['family_id']) && $data['family_id'] != 1) { 
+				$desc .= "<br>Family: ".Roster::getFamilyById($data['family_id']); 
+			}
+			if(!empty($data['status_id'])) { $desc .= "<br>Status: ".Roster::getStatusById($data['status_id']); }
+			if(!empty($data['industry'])) { $desc .= "<br>Industry: ".$data['industry']; }
+			if(!empty($data['location'])) { $desc .= "<br>Location: ".$data['location']; }
+			$desc .= "<br>";
 		}
 		return $desc;
 	}
@@ -108,16 +122,27 @@ class Roster {
 		$semesters = DB::table('semester')->get();
 		$families = DB::table('family')->get();
 		$statuses = DB::table('status')->get();
+		$industries = Roster::getOptionsByField('industry');
+		$locations = Roster::getOptionsByField('location');
 
 		$results = array(
 			'roster' => $roster,
 			'semesters' => $semesters,
 			'families' => $families,
 			'statuses' => $statuses,
+			'industries' => $industries,
+			'locations' => $locations,
 		);
+		return $results;
+	}
 
-		// dd($results);
-
+	private static function getOptionsByField($field) {
+		$sql = "SELECT DISTINCT $field AS field FROM roster";
+		$results = array();
+		$db_results = DB::query($sql);
+		foreach ($db_results as $db_result) {
+			array_push($results, $db_result->field);
+		}
 		return $results;
 	}
 
@@ -182,6 +207,9 @@ class Roster {
 			'status_id' => $data['status_id'],
 			'linkedin' => $data['linkedin']
 		));
+		// if($data['linkedin']) {
+		// 	Linkedin::getProfileById('');
+		// }
 		return $success;
 	}
 
@@ -200,14 +228,15 @@ class Roster {
 				'family_id' => $data['family_id'],
 				'status_id' => $data['status_id'],
 				'linkedin' => $data['linkedin']
-			));
+		));
+		if($data['linkedin']) {
+			Linkedin::getProfileById($data['bro_id']);
+		}
 	}
 
 	public static function delete($id) {
 		DB::table('roster')->where('bro_id','=',$id)->delete();
 	}
-
-
 
 }
 
