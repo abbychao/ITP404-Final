@@ -11,7 +11,9 @@ class Roster {
 			->join('family','roster.family_id','=','family.family_id')
 			->join('status','roster.status_id','=','status.status_id')
 			->join('semester AS grad_sem','roster.grad_sem_id', '=', 'grad_sem.semester_id')
-			->join('semester AS pc_sem', 'roster.pc_sem_id', '=', 'pc_sem.semester_id');
+			->join('semester AS pc_sem', 'roster.pc_sem_id', '=', 'pc_sem.semester_id')
+			->order_by('status_id','asc')
+			->order_by('bro_lname', 'asc');
 			// ->get();
 
 		$results = $query->get(array('roster.*','family_name','status_name',
@@ -53,7 +55,7 @@ class Roster {
 		AND roster.pc_sem_id = pc_sem.semester_id';
 
 		// Adding Search Clauses
-		if(isset($data['fname'])) {
+		if(!empty($data['fname'])) {
 			$sql .= ' AND roster.bro_fname LIKE "%'.$data['fname'].'%"';
 		}
 		if(!empty($data['lname'])) {
@@ -86,6 +88,7 @@ class Roster {
 		if(!empty($data['location'])) {
 			$sql .= ' AND roster.location = "'.$data['location'].'"';
 		}
+		$sql .= ' ORDER BY status_id ASC, bro_lname ASC';
 		$results = DB::query($sql);
 		return $results;
 	}

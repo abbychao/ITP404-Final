@@ -1,0 +1,26 @@
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+        color: black;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+    }
+    .autocomplete-li {
+        list-style: none;
+        display: block;
+        left:0;
+        background-color: gray;
+        padding: 2px;
+        width: 200px;
+        height: ;
+    }

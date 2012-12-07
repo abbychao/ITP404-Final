@@ -11,7 +11,7 @@
 		First Name: <input type='text' name='fname' /><br>
 		Last Name: <input type='text' name='lname' /><br>
 		Status: <select name='status_id'>
-			<option name='status_id' value=''><option>
+			<option name='status_id' value=''></option>
 			<?php foreach ($options['statuses'] as $status) : ?>
 				<option name='status_id' value='<?php echo $status->status_id ?>'><?php echo $status->status_name ?></option>
 			<?php endforeach ?>

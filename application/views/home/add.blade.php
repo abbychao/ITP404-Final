@@ -2,6 +2,7 @@
 <head>
 	<title>Add New Member</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::to_asset('css/home.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo URL::to_asset('css/autocomplete.css') ?>">
 </head>
 <body>
 @include('home.header')
@@ -13,40 +14,43 @@
 	{{ $errors->has('grad_year') ? 'Please enter a 4-digit graduation year.<br>' : '' }}
 	{{ $errors->has('linkedin') ? 'Please enter a valid LinkedIn URL.<br>' : '' }}
 	<form action="<?php echo URL::to('home/added') ?>" method="post">
-		First Name: <input type='text' name='fname' /><br>
-		Last Name: <input type='text' name='lname' /><br>
-		Status: <select name='status_id'>
+		<label>First Name:</label> <input type='text' name='fname' /><br>
+		<label>Last Name:</label> <input type='text' name='lname' /><br>
+		<label>Status:</label> <select name='status_id'>
 			<?php foreach ($options['statuses'] as $status) : ?>
 				<option name='status_id' value='<?php echo $status->status_id ?>'><?php echo $status->status_name ?></option>
 			<?php endforeach ?>
 		</select><br>
-		Pledge Class: <select name='pc_sem_id'>
+		<label>Pledge Class:</label> <select name='pc_sem_id'>
 			<?php foreach ($options['semesters'] as $semester) : ?>
 				<option name='pc_sem_id' value='<?php echo $semester->semester_id ?>'><?php echo $semester->semester_name ?></option>
 			<?php endforeach ?>
 		</select>
 		<input type='text' name='pc_year'><br>
-		Graduation: <select name='grad_sem_id'>
+		<label>Graduation:</label> <select name='grad_sem_id'>
 			<?php foreach ($options['semesters'] as $semester) : ?>
 				<option name='grad_sem_id' value='<?php echo $semester->semester_id ?>'><?php echo $semester->semester_name ?></option>
 			<?php endforeach ?>
 		</select>
 		<input type='text' name='grad_year'><br>
-		Family: <select name='family_id'>
+		<label>Family:</label> <select name='family_id' id='family_id'>
 			<?php foreach ($options['families'] as $family) : ?>
 				<option name='family_id' value='<?php echo $family->family_id ?>'><?php echo $family->family_name ?></option>
 			<?php endforeach ?>
 		</select><br>
-		Big Bro: <select name='bigbro_id'>
+		<label>Big Bro:</label><select name='bigbro_id' id='combobox'>
 			<option name='bigbro_id' value='0'></option>
 			<?php foreach ($options['roster'] as $bro) : ?>
 				<option name='bigbro_id' value='<?php echo $bro->bro_id ?>'><?php echo $bro->bro_fname.' '.$bro->bro_lname ?></option>
 			<?php endforeach ?>
 		</select><br>
-		LinkedIn: <input type='text' name='linkedin' /><br>
+		<label>LinkedIn:</label> <input type='text' name='linkedin' /><br>
 		<input type="submit" value="Add New Member" />
 	</form>
 </div>
 @include('home.footer')
 </body>
+	<script type="text/javascript" src="<?php echo URL::to_asset('js/jquery-1.8.3.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo URL::to_asset('js/jquery-ui-1.9.2.custom.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo URL::to_asset('js/autocomplete.js') ?>"></script>
 </html>

@@ -100,8 +100,8 @@ class Home_Controller extends Base_Controller {
 		$rules = array(
 			'fname' => 'required',
 			'lname' => 'required',
-			'pc_year' => 'integer|size:4|between:1922,3000',
-			'grad_year' => 'integer|size:4|between:1922,3000',
+			'pc_year' => 'integer|between:1922,3000',
+			'grad_year' => 'integer|between:1922,3000',
 			'linkedin' => 'active_url'
 		);
 		$validation = Validator::make($input, $rules);
@@ -133,11 +133,11 @@ class Home_Controller extends Base_Controller {
 		$rules = array(
 			'fname' => 'required',
 			'lname' => 'required',
-			'pc_year' => 'integer|size:4|between:1922,3000',
-			'grad_year' => 'integer|size:4|between:1922,3000',
+			'pc_year' => 'integer|between:1922,3000',
+			'grad_year' => 'integer|between:1922,3000',
 			'linkedin' => 'active_url'
 		);
-		$validation = Validator::make($input, $rules);
+		// $validation = Validator::make($input, $rules);
 		// if($validation->fails()) {
 		// 	return Redirect::to('home/edit')->with_errors($validation);
 		// }
@@ -194,6 +194,10 @@ class Home_Controller extends Base_Controller {
 
 	public function action_family_ajax() {
 		echo json_encode(Family::getMembers($_REQUEST['family_id']));
+	}
+
+	public function action_bigbro_ajax() {
+		echo json_encode(Roster::all());
 	}
 
 }
