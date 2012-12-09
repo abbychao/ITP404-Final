@@ -106,7 +106,7 @@ class Home_Controller extends Base_Controller {
 		);
 		$validation = Validator::make($input, $rules);
 		if($validation->fails()) {
-			return Redirect::to('home/add')->with_errors($validation);
+			return Redirect::to('home.add')->with_errors($validation);
 		}
 
 		Roster::add($input);
@@ -173,7 +173,7 @@ class Home_Controller extends Base_Controller {
 			'bro' => Roster::getBrother($bro_id),
 			'options' => Roster::getOptions()
 		);
-		return View::make('home.view', $data);
+		return View::make('view', $data);
 	}
 
 	public function action_map() {

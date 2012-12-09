@@ -44,8 +44,20 @@ Route::controller('home');
 
 Route::get('/', function()
 {
-	return View::make('home.index');
+		session_start();
+		$input = Input::all();
+		$roster = Roster::all();
+
+
+		$data = array(
+			'query' => null,
+			'results' => $roster,
+			'options' => Roster::getOptions()
+		);
+
+	return View::make('home.index', $data);
 });
+
 
 /*
 |--------------------------------------------------------------------------
