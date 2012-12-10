@@ -10,6 +10,6 @@ For my final project, I created an interactive membership database for collegiat
 5. **jQuery Interactivity:** jQueryUI's autocomplete when adding/editing the "Big Bro" field of users (also uses AJAX).
 
 ## Additional Elements
--**Data Validation using Laravel's Validator class:** When adding members, first and last names are required, years must be valid 4-digit numbers, and LinkedIn URLs must be valid URLs.  
--**Database Integration:** This site makes extensive use of database queries using Fluent.  
--**Administrative Backend:** Navigate to /home/admin and login with the password may1922 to be able to add/edit records.  
+- **Data Validation using Laravel's Validator class:** When adding members, first and last names are required, years must be valid 4-digit numbers, and LinkedIn URLs must be valid URLs.  
+- **Database Integration:** This site makes extensive use of database queries using Fluent.  
+- **Administrative Backend:** Navigate to /home/admin and login with the password may1922 to be able to add/edit records.  
