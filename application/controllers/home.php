@@ -173,7 +173,7 @@ class Home_Controller extends Base_Controller {
 			'bro' => Roster::getBrother($bro_id),
 			'options' => Roster::getOptions()
 		);
-		return View::make('view', $data);
+		return View::make('home.view', $data);
 	}
 
 	public function action_map() {
