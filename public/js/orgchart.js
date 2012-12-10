@@ -9,7 +9,6 @@ function drawChart() {
     },
     dataType: 'json',
     success: function(response) {
-      dd(response);
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Name');
       data.addColumn('string', 'Big Bro');

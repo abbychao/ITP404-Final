@@ -38,13 +38,9 @@
 						address: locations[i]
 					};
 
-					console.log(content);
-
 					(function(content) {
 						geocoder.geocode(param1, function(results, status) {	
-							//console.log(results, Boolean(results))
 							if (results.length > 0) {
-								console.log(results);
 								var latlng = results[0].geometry.location;
 
 								var marker = new google.maps.Marker({
