@@ -30,7 +30,7 @@
 		<a href="<?php echo URL::to('home/view').'?bro_id='.$bro->bigbro_id ?>">
 			<?php echo Roster::getNameById($bro->bigbro_id); ?>
 		</a><br>
-	<label>Email:</label><?php echo $bro->email ?>
+	<label>Email:</label><a href="mailto:<?php echo $bro->email ?>"><?php echo $bro->email ?></a>
 	<br>
 	<label>Headline:</label> <?php echo $bro->headline ?><br>
 	<label>Industry:</label> <?php echo $bro->industry ?><br>
