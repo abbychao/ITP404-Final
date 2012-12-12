@@ -5,3 +5,4 @@ web1:
    - mysqli
    - mysql
    - mbstring
+   - pdo_mysql
