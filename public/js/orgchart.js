@@ -3,7 +3,7 @@ google.setOnLoadCallback(drawChart);
 function drawChart() {
 
   $.ajax({
-    url: 'http://localhost:8888/GitHub/ITP404-Final/public/home/family_ajax',
+    url: 'http://dsp.pagodabox.com/public/home/family_ajax',
     data: {
       family_id: global_family_id // TO BE UPDATED
     },

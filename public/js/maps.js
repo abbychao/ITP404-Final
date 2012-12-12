@@ -14,7 +14,7 @@
 
 
 	$.ajax({
-		url: 'http://localhost:8888/GitHub/ITP404-Final/public/home/map_ajax',
+		url: 'http://dsp.pagodabox.com/public/home/map_ajax',
 		data: {
 			// user: user
 		},
