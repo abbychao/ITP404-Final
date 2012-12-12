@@ -208,6 +208,7 @@ class Roster {
 			'bigbro_id' => $data['bigbro_id'],
 			'family_id' => $data['family_id'],
 			'status_id' => $data['status_id'],
+			'email' => $data['email'],
 			'linkedin' => $data['linkedin']
 		));
 		// if($data['linkedin']) {
@@ -230,6 +231,7 @@ class Roster {
 				'bigbro_id' => $data['bigbro_id'],
 				'family_id' => $data['family_id'],
 				'status_id' => $data['status_id'],
+				'email' => $data['email'],
 				'linkedin' => $data['linkedin']
 		));
 		if($data['linkedin']) {

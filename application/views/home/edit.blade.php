@@ -48,6 +48,7 @@
 				<option name='bigbro_id' value='<?php echo $bigbro->bro_id ?>'><?php echo $bigbro->bro_fname.' '.$bigbro->bro_lname ?></option>
 			<?php endforeach ?>
 		</select><br>
+		Email: <input type='text' name='email' value='<?php echo $bro->email ?>' /><br>
 		LinkedIn: <input type='text' name='linkedin' value='<?php echo $bro->linkedin ?>' /><br>
 		<input type="submit" value="Submit Edits" />
 	</form>

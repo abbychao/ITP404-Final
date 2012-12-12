@@ -44,6 +44,7 @@
 				<option name='bigbro_id' value='<?php echo $bro->bro_id ?>'><?php echo $bro->bro_fname.' '.$bro->bro_lname ?></option>
 			<?php endforeach ?>
 		</select><br>
+		<label>Email:</label> <input type='text' name='email' /><br>
 		<label>LinkedIn:</label> <input type='text' name='linkedin' /><br>
 		<input type="submit" value="Add New Member" />
 	</form>
