@@ -12,4 +12,9 @@ class Admin {
 		}
 		return $_SESSION['admin'];
 	}
+
+	public static function getPassword() {
+		$query = DB::table('user')->get();
+		return $query;
+	}
 }

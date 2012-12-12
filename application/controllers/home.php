@@ -32,6 +32,7 @@ class Home_Controller extends Base_Controller {
 
 	public function action_index() {
 		session_start();
+		dd(Admin::getPassword());
 		$input = Input::all();
 		$query = null;
 
