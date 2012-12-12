@@ -21,8 +21,10 @@
 		<li><a href="#">Family Trees</a>
 			<ul><?php
 				foreach ($options['families'] as $family) {
-					echo '<li><a href="'.URL::to('home/family').'?family_id='
-					.$family->family_id.'">'.$family->family_name.'</a></li>';
+					if($family->family_id != 1) {}
+						echo '<li><a href="'.URL::to('home/family').'?family_id='
+						.$family->family_id.'">'.$family->family_name.'</a></li>';
+					}
 				}
 			?></ul>
 		</li>

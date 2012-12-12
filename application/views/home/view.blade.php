@@ -31,7 +31,7 @@
 			<?php echo Roster::getNameById($bro->bigbro_id); ?>
 		</a><br>
 	<label>Email:</label><a href="mailto:<?php echo $bro->email ?>"><?php echo $bro->email ?></a>
-	<br>
+	<br><br>
 	<label>Headline:</label> <?php echo $bro->headline ?><br>
 	<label>Industry:</label> <?php echo $bro->industry ?><br>
 	<label>Location:</label> <?php echo $bro->location ?><br>
