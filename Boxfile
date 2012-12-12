@@ -1,5 +1,17 @@
+global:
+  env:
+    - LARAVEL_ENV: production
 web1: 
   name: dorathy  
+  shared_writable_dirs:
+   - /storage/cache
+   - /storage/database
+   - /storage/logs
+   - /storage/sessions
+   - /storage/views
+   - /storage/work
+  document root: /public
+  php_version: 5.3.8
   php_extensions:
    - mcrypt
    - mysqli
