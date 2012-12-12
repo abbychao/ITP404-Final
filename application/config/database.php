@@ -68,7 +68,7 @@ return array(
 		),
 
 		'mysql' => array(
-			'driver'   => 'mysqli',
+			'driver'   => 'mysql',
 			'host'     => 'tunnel.pagodabox.com',
 			'database' => 'dsp',
 			'username' => 'allie',
