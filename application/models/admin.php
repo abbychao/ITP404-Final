@@ -4,7 +4,7 @@ class Admin {
 	private static $password = 'may1922';
 
 	public static function verifyPass($input) {
-		if($input == static::$password) {
+		if($input == getPassword()) {
 			$_SESSION['admin'] = true;
 		}
 		else {
@@ -14,7 +14,8 @@ class Admin {
 	}
 
 	public static function getPassword() {
-		$query = DB::table('user')->get();
-		return $query;
+		$results = DB::table('user')->where('username','=','admin')->get(array('password'));
+		$password = $results[0]->password;
+		return $password;
 	}
 }
