@@ -93,9 +93,9 @@ class Roster {
 		if(!empty($data['query'])) {
 			$sql .= ' AND (roster.bro_fname LIKE "%'.$data['query'].'%"';
 			$sql .= ' OR roster.bro_lname LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR roster.grad_sem LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR grad_sem.semester_name LIKE "%'.$data['query'].'%"';
 			$sql .= ' OR roster.grad_year LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR roster.pc_sem LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR pc_sem.semester_name LIKE "%'.$data['query'].'%"';
 			$sql .= ' OR roster.pc_year LIKE "%'.$data['query'].'%"';
 			$sql .= ' OR family.family_name LIKE "%'.$data['query'].'%"';
 			$sql .= ' OR status.status_name LIKE "%'.$data['query'].'%"';
@@ -114,6 +114,7 @@ class Roster {
 		}
 		else{
 			$desc = "<i>Showing results for...</i><br>";
+			if(!empty($data['query'])) {$desc.="<br>Search Term: ".$data['query']; }
 			if(!empty($data['fname'])) { $desc .= "<br>First Name: ".$data['fname']; }
 			if(!empty($data['lname'])) { $desc .= "<br>Last Name: ".$data['lname']; }
 			if(!empty($data['grad_sem_id']) or !empty($data['grad_year'])) { 

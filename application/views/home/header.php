@@ -19,6 +19,7 @@
 		<li><a href="<?php echo URL::to('home/search') ?>">Search</a>
 			<ul><li id='searchbar'>
 				<form action='<?php echo URL::to('home/index') ?>' method='post'>
+					<input type='hidden' name='from_search' value='1'>
 					<input type='text' name='query'>
 					<input type='submit' value='Search'>
 				</form>

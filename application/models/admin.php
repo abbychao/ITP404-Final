@@ -2,7 +2,7 @@
 
 class Admin {
 	public static function verifyPass($input) {
-		if($input == getPassword()) {
+		if($input == Admin::getPassword()) {
 			$_SESSION['admin'] = true;
 		}
 		else {

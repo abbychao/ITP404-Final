@@ -200,4 +200,10 @@ class Home_Controller extends Base_Controller {
 		echo json_encode(Roster::all());
 	}
 
+	public function action_header() {
+		session_start();
+		$data = array('options' => Roster::getOptions());
+		return View::make('home.header', $data);
+	}
+
 }
