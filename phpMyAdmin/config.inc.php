@@ -40,9 +40,9 @@ $cfg['Servers'][$i]['AllowNoPassword'] = false;
  */
 
 /* User used to manipulate with storage */
-// $cfg['Servers'][$i]['controlhost'] = '';
-// $cfg['Servers'][$i]['controluser'] = 'pma';
-// $cfg['Servers'][$i]['controlpass'] = 'pmapass';
+$cfg['Servers'][$i]['controlhost'] = '';
+$cfg['Servers'][$i]['controluser'] = 'pma';
+$cfg['Servers'][$i]['controlpass'] = 'pmapass';
 
 /* Storage database and tables */
 $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';
@@ -76,7 +76,7 @@ $cfg['SaveDir'] = '';
  * button in browse mode or not.
  * default = false
  */
-//$cfg['ShowAll'] = true;
+$cfg['ShowAll'] = true;
 
 /**
  * Number of rows displayed when browsing a result set. If the result
