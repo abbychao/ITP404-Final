@@ -18,3 +18,4 @@ web1:
    - mysql
    - mbstring
    - pdo_mysql
+   - oauth
