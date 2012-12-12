@@ -92,15 +92,20 @@ body, #menu, #content {
 #menu ul li ul li a {
 	display:block; 
 	width:100px;
-	height:40px; 
 	text-align:center;
-	line-height: 40px;
 	height:20px;
 	line-height: 20px;
 	background-color: gray;
 }
 #menu ul li ul li {
 	border: none;
+}
+#searchbar {
+	display: block;
+	width:200px;
+	height:40px;
+	line-height: 40px;
+	background-color: gray;
 }
 #chart-div {
 	width: 940px;

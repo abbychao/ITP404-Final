@@ -88,6 +88,21 @@ class Roster {
 		if(!empty($data['location'])) {
 			$sql .= ' AND roster.location = "'.$data['location'].'"';
 		}
+
+		// from master search form... does not find big bros
+		if(!empty($data['query'])) {
+			$sql .= ' AND (roster.bro_fname LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR roster.bro_lname LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR roster.grad_sem LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR roster.grad_year LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR roster.pc_sem LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR roster.pc_year LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR family.family_name LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR status.status_name LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR roster.industry LIKE "%'.$data['query'].'%"';
+			$sql .= ' OR roster.location LIKE "%'.$data['query'].'%")';
+		}
+
 		$sql .= ' ORDER BY status_id ASC, bro_lname ASC';
 		$results = DB::query($sql);
 		return $results;

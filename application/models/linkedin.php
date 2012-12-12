@@ -51,7 +51,8 @@ class Linkedin {
 
 	public static function getProfileById($id) {
 		// Specify LinkedIn API endpoint to retrieve your own profile
-		$pub_prof_url = Roster::getBrother($id)->linkedin;
+		$bro = Roster::getBrother($id);
+		$pub_prof_url = $bro->linkedin;
 		if($pub_prof_url == null) {
 			return null;
 		}
@@ -76,8 +77,9 @@ class Linkedin {
 		$simpleXML = simplexml_load_string($xmlString);
 		$results = array($simpleXML);
 		$results = $results[0];
-		Linkedin::updateProfile($id, $results);
-		// dd($results);
+		if($bro->lnkd_updated > strtotime("-1 week")) {
+			Linkedin::updateProfile($id, $results);
+		}
 		return $results;
 	}
 
