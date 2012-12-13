@@ -1,6 +1,4 @@
-<?php 
-	Admin::start();
-?>
+<?php Admin::start() ?>
 <a href="<?php echo URL::to('home') ?>">
 	<img src="<?php echo URL::to_asset('img/header940-large1.png') ?>" id="header_logo">
 </a>

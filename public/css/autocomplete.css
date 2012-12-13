@@ -19,8 +19,8 @@
         list-style: none;
         display: block;
         left:0;
-        background-color: gray;
+        background-color: white;
+        color: black;
         padding: 2px;
         width: 200px;
-        height: ;
     }
