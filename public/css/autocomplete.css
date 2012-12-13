@@ -20,7 +20,10 @@
         display: block;
         left:0;
         background-color: white;
-        color: black;
         padding: 2px;
         width: 200px;
+    }
+    .autocomplete-li a {
+        color:black;
+        font-size: 12px;
     }
