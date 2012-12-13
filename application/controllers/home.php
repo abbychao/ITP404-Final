@@ -74,10 +74,13 @@ class Home_Controller extends Base_Controller {
 
 		);
 
-		if(isset($input['pass'])) {
-			Admin::verifyPass($input['pass']);
+		if(isset($input['logout'])) {
+			Admin::logout();
 		}
-		if($_SESSION['admin']) {
+		if(isset($input['username']) && isset($input['pass'])) {
+			Admin::login($input['username'], $input['pass']);
+		}
+		if($_SESSION['loggedin']) {
 			return View::make('home.index', $data);
 		} 
 		else {

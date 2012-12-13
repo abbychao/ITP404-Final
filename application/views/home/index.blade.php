@@ -14,7 +14,7 @@
 		<table>
 			<th>Name</th><th>Pledge Semester</th><th>Grad Semester</th><th>Status</th>
 			<th>Family</th><th>Big Bro</th><th>LinkedIn</th>
-			<?php if($_SESSION['admin']) { echo '<th>Admin</th>'; } ?>
+			<?php if($_SESSION['loggedin']) { echo '<th>Action</th>'; } ?>
 			<?php foreach($results as $bro) : ?>
 				<tr>
 					<td>
@@ -54,10 +54,14 @@
 							echo "<a href='".$bro->linkedin."'>Link</a>";
 						}
 					?></td>
-					<?php if($_SESSION['admin']) { ?>		
+					<?php if($_SESSION['loggedin']) { ?>		
 						<td>
+							<?php if($_SESSION['admin']['edit']) { ?>
 							<a href="<?php echo URL::to('home/edit') ?>?bro_id=<?php echo $bro->bro_id ?>">Edit</a>
+							<?php } ?>
+							<?php if($_SESSION['admin']['delete']) { ?>
 							<a href="<?php echo URL::to('home/delete') ?>?bro_id=<?php echo $bro->bro_id ?>">Delete</a>
+							<?php } ?>
 						</td>
 					<?php } ?>
 				</tr>

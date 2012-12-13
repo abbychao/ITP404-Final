@@ -1,19 +1,57 @@
 <?php
 
 class Admin {
-	public static function verifyPass($input) {
-		if($input == Admin::getPassword()) {
-			$_SESSION['admin'] = true;
+
+	public static function start() {
+		if(!isset($_SESSION['loggedin'])) {
+			$_SESSION['loggedin'] = FALSE;
 		}
-		else {
-			$_SESSION['admin'] = false;
+		if(!isset($_SESSION['admin'])) {
+			$_SESSION['admin'] = array(
+				'add' => FALSE,
+				'edit' => FALSE,
+				'delete' => FALSE,
+				'edit_users' => FALSE
+			);
 		}
-		return $_SESSION['admin'];
 	}
 
-	private static function getPassword() {
-		$results = DB::table('user')->where('username','=','admin')->get(array('password'));
-		$password = $results[0]->password;
-		return $password;
+	public static function login($username, $password) {
+		$user = DB::table('user')->where('username','=',$username)->get();
+		if(isset($user[0]) && $password == $user[0]->password) {
+			$_SESSION['loggedin'] = true;
+			if($username == 'admin') {
+				Admin::setAdmin();
+			} 
+			if($username == 'dspphi') {
+				Admin::setMember();
+			}
+		}
+		else {
+			$_SESSION['loggedin'] = false;
+		}
 	}
+
+	public static function logout() {
+		$_SESSION['loggedin'] = false;
+	}
+
+	public static function setAdmin() {
+		$_SESSION['admin'] = array(
+			'add' => true,
+			'edit' => true,
+			'delete' => true,
+			'edit_users' => true
+		);
+	}
+
+	public static function setMember() {
+		$_SESSION['admin'] = array(
+			'add' => false,
+			'edit' => true,
+			'delete' => false,
+			'edit_users' => false
+		);
+	}
+
 }
