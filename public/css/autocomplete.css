@@ -18,8 +18,8 @@
     .autocomplete-li {
         list-style: none;
         display: block;
-        left:0;
         background-color: white;
+        margin-left: -40px;
         padding: 2px;
         width: 200px;
     }
