@@ -6,7 +6,7 @@
 <body>
 	@include('home.header')
 	<h1><?php echo $bro->bro_fname ?> <?php echo $bro->bro_lname ?></h1>
-	<?php if($_SESSION['admin']) { echo '<p><a href="'.URL::to('home/edit').'?bro_id='.$bro->bro_id.'">Edit Profile</a></p>'; } ?>
+	<?php if($_SESSION['admin']['edit']) { echo '<p><a href="'.URL::to('home/edit').'?bro_id='.$bro->bro_id.'">Edit Profile</a></p>'; } ?>
 	<img src="<?php echo $bro->photo_url ?>"><br>
 	<label>Status:</label>
 		<a href="<?php echo URL::to('home/index').'?from_search=true&status_id='.$bro->status_id ?>">
