@@ -255,6 +255,15 @@ class Roster {
 		}
 	}
 
+	public static function editAll($data) {
+		for ($i=0; $i < count(Roster::all()) ; $i++) { 
+			DB::table('roster')->where('bro_id','=',$data['bro_id'.$i])->update(array(
+				'email' => $data['email'.$i],
+				'linkedin' => $data['linkedin'.$i]
+			));
+		}
+	}
+
 	public static function delete($id) {
 		DB::table('roster')->where('bro_id','=',$id)->delete();
 	}

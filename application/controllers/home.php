@@ -140,16 +140,35 @@ class Home_Controller extends Base_Controller {
 			'grad_year' => 'integer|between:1922,3000',
 			'linkedin' => 'active_url'
 		);
-		// $validation = Validator::make($input, $rules);
-		// if($validation->fails()) {
-		// 	return Redirect::to('home/edit')->with_errors($validation);
-		// }
 		Roster::edit($input);
 		$data = array(
 			'input' => $input,
 			'options' => Roster::getOptions()
 		);
 		return View::make('home.edited', $data);
+	}
+
+	public function action_edit_all() {
+		session_start();
+
+		$data = array(
+			'results' => Roster::all(),
+			'options' => Roster::getOptions()
+		);
+
+		return View::make('home.edit_all', $data);
+	}
+
+	public function action_edited_all() {
+		session_start();
+		$input = Input::all();
+		$rules = array(); // TBU
+		Roster::editAll($input);
+		$data = array(
+			'input' => $input,
+			'options' => Roster::getOptions()
+		);
+		return View::make('home.edited',$data);
 	}
 
 	public function action_delete() {
