@@ -38,7 +38,7 @@ class Linkedin {
 		$simpleXML = simplexml_load_string($xmlString);
 		$results = array($simpleXML);
 		$results = $results[0];
-		if($bro->lnkd_updated > strtotime("-1 week")) {
+		if(empty($bro->lnkd_updated) or $bro->lnkd_updated > strtotime("-1 week")) {
 			Linkedin::updateProfile($id, $results);
 		}
 		return $results;
