@@ -224,8 +224,8 @@ class Roster {
 			'bigbro_id' => $data['bigbro_id'],
 			'family_id' => $data['family_id'],
 			'status_id' => $data['status_id'],
-			'email' => $data['email'],
-			'linkedin' => $data['linkedin']
+			'email' => rtrim($data['email']),
+			'linkedin' => rtrim($data['linkedin'])
 		));
 		// if($data['linkedin']) {
 		// 	Linkedin::getProfileById('');
@@ -247,8 +247,8 @@ class Roster {
 				'bigbro_id' => $data['bigbro_id'],
 				'family_id' => $data['family_id'],
 				'status_id' => $data['status_id'],
-				'email' => $data['email'],
-				'linkedin' => $data['linkedin']
+				'email' => rtrim($data['email']),
+				'linkedin' => rtrim($data['linkedin'])
 		));
 		if($data['linkedin']) {
 			Linkedin::getProfileById($data['bro_id']);
@@ -258,8 +258,8 @@ class Roster {
 	public static function editAll($data) {
 		for ($i=0; $i < count(Roster::all()) ; $i++) { 
 			DB::table('roster')->where('bro_id','=',$data['bro_id'.$i])->update(array(
-				'email' => $data['email'.$i],
-				'linkedin' => $data['linkedin'.$i]
+				'email' => rtrim($data['email'.$i]),
+				'linkedin' => rtrim($data['linkedin'.$i])
 			));
 		}
 	}
