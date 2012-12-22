@@ -110,6 +110,9 @@ body, #menu, #content {
 #searchbar input {
 	font-size: 12px;
 }
+.org-node {
+	color: black;
+}
 #chart-div {
 	width: 940px;
 	overflow: auto; /*help*/

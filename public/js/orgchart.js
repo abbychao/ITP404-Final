@@ -16,7 +16,7 @@ function drawChart() {
 
       var i = 0;
       while(response[i] != null) {
-        var content = '<font color=black>'+response[i].bro_fname+' '+response[i].bro_lname;
+        var content = response[i].bro_fname+' '+response[i].bro_lname;
         content +='<br>'+response[i].pc_sem+' '+response[i].pc_year+'</font>';
         var bigbro_id = response[i].bigbro_id;
         if(bigbro_id == 0) {bigbro_id = null;}
@@ -28,7 +28,10 @@ function drawChart() {
 
 
       var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
-      chart.draw(data, {allowHtml:true});
+      chart.draw(data, {
+        allowHtml:true,
+        nodeClass: 'org-node'
+      });
     },
     error: function(err1, err2, err3) {
       console.log(err1, err2, err3);
