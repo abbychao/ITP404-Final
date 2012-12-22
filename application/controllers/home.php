@@ -31,7 +31,7 @@ class Home_Controller extends Base_Controller {
 	*/
 
 	public function action_index() {
-		Facebook::getInfoByUser('abbyc');
+		// Facebook::getInfoByUser('abbyc');
 		session_start();
 		$input = Input::all();
 		$query = null;
