@@ -8,46 +8,7 @@ class Linkedin {
 	private $request_token;
 	private $access_token;
 	public $oauth;
-	// public $loggedin = FALSE;
-/*
-	public function __construct($api_key, $secret_key) {
-		$this->oauth = new OAuth($api_key, $secret_key);
-	}
 
-	public static function start() {
-		if(!isset($_SESSION['linkedin'])) {
-			$_SESSION['linkedin'] = new Linkedin(static::$api_key, static::$secret_key);
-		}
-	}
-
-	public function getAuthURL() {
-		$request_url = 'https://api.linkedin.com/uas/oauth/requestToken';
-		$callback_url = URL::to('home/index');
-		if(isset($this->request_token)){
-			$this->request_token = $this->oauth->getRequestToken($request_url, $callback_url);
-		}
-		$url = 'https://api.linkedin.com/uas/oauth/authorize?oauth_token='.$this->request_token['oauth_token'];
-		return $url;
-	}
-
-	public function validate($oauth_verifier) {
-		$oauth = new OAuth(static::$api_key, static::$secret_key);
-		$oauth->setToken(
-			$_SESSION['linkedin']->request_token['oauth_token'], 
-			$_SESSION['linkedin']->request_token['oauth_token_secret']
-		);
-
-		$access_token_url = 'https://api.linkedin.com/uas/oauth/accessToken';
-		$access_token_response = $oauth->getAccessToken($access_token_url, '', $oauth_verifier);
-		 
-		if($access_token_response === FALSE) {
-		        throw new Exception("Failed fetching request token, response was: " . $oauth->getLastResponse());
-		} else {
-		        $this->access_token = $access_token_response;
-		        $this->loggedin = TRUE;
-		}
-	}
-	*/
 
 	public static function getProfileById($id) {
 		// Specify LinkedIn API endpoint to retrieve your own profile
