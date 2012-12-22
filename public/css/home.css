@@ -110,6 +110,16 @@ body, #menu, #content {
 #searchbar input {
 	font-size: 12px;
 }
+#profile-left {
+	float: left;
+	width: 200px;
+}
+#profile-right {
+	padding: 10px;
+}
+#profile-pic {
+	width: 200px;
+}
 .org-node {
 	color: black;
 }

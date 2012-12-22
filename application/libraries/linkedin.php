@@ -19,7 +19,7 @@ class Linkedin {
 		}
 		$pub_prof_url = urlencode($pub_prof_url);
 		$url = "http://api.linkedin.com/v1/people/url=$pub_prof_url";
-		$url .= ":(first-name,last-name,headline,location:(name),industry,picture-url)";
+		$url .= ":(first-name,last-name,headline,location:(name),industry,picture-urls::(original))";
 
 		$oauth = new OAuth(static::$api_key, static::$secret_key);
 		$oauth->setToken(static::$oauth_token, static::$oauth_key);
@@ -38,9 +38,9 @@ class Linkedin {
 		$simpleXML = simplexml_load_string($xmlString);
 		$results = array($simpleXML);
 		$results = $results[0];
-		if(empty($bro->lnkd_updated) or $bro->lnkd_updated > strtotime("-1 week")) {
+		// if(empty($bro->lnkd_updated) or $bro->lnkd_updated > strtotime("-1 week")) {
 			Linkedin::updateProfile($id, $results);
-		}
+		// }
 		return $results;
 	}
 
@@ -50,7 +50,7 @@ class Linkedin {
 				'headline' => $details->headline,
 				'location' => $details->location->name,
 				'industry' => $details->industry,
-				'photo_url' => $details->{'picture-url'},
+				'photo_url' => $details->{'picture-urls'}->{'picture-url'},
 				'lnkd_updated' => time()
 			));
 	}
