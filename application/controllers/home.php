@@ -54,7 +54,7 @@ class Home_Controller extends Base_Controller {
 		return View::make('home.index', $data);
 	}
 
-	public function action_admin() {
+	public function action_login() {
 		session_start();
 		$input = Input::all();
 		$query = null;
@@ -85,7 +85,7 @@ class Home_Controller extends Base_Controller {
 			return View::make('home.index', $data);
 		} 
 		else {
-			return View::make('home.admin', $data);
+			return View::make('home.login', $data);
 		}
 	}
 
@@ -134,13 +134,6 @@ class Home_Controller extends Base_Controller {
 	public function action_edited() {
 		session_start();
 		$input = Input::all();
-		$rules = array(
-			'fname' => 'required',
-			'lname' => 'required',
-			'pc_year' => 'integer|between:1922,3000',
-			'grad_year' => 'integer|between:1922,3000',
-			'linkedin' => 'active_url'
-		);
 		Roster::edit($input);
 		$data = array(
 			'input' => $input,
@@ -163,7 +156,6 @@ class Home_Controller extends Base_Controller {
 	public function action_edited_all() {
 		session_start();
 		$input = Input::all();
-		$rules = array(); // TBU
 		Roster::editAll($input);
 		$data = array(
 			'input' => $input,

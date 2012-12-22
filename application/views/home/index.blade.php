@@ -13,7 +13,7 @@
 	<div id="results">
 		<table>
 			<th>Name</th><th>Pledge Semester</th><th>Grad Semester</th><th>Status</th>
-			<th>Family</th><th>Big Bro</th><th>LinkedIn</th>
+			<th>Family</th><th>Big Bro</th><th>Connect</th>
 			<?php if($_SESSION['loggedin']) { echo '<th>Action</th>'; } ?>
 			<?php foreach($results as $bro) : ?>
 				<tr>
@@ -51,7 +51,7 @@
 					</td>
 					<td><?php
 						if(!empty($bro->linkedin)) {
-							echo "<a href='".$bro->linkedin."'>Link</a>";
+							echo "<a href='".$bro->linkedin."'>LinkedIn</a>";
 						}
 					?></td>
 					<?php if($_SESSION['loggedin']) { ?>		
