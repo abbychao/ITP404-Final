@@ -121,7 +121,9 @@ body, #menu, #content {
 	width: 200px;
 }
 .org-node {
-	color: #e7ca2b;
+	color: #cccccc;
+	background-color: gray;
+	border: solid thin gray;
 }
 #chart-div {
 	width: 940px;
