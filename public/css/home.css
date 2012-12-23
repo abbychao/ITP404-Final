@@ -120,8 +120,12 @@ body, #menu, #content {
 #profile-pic {
 	width: 200px;
 }
+tbody {
+	width:940px;
+}
 .node {
 	color: #cccccc;
+	border-radius: 5px;
 	background-color: gray;
 	border: solid thin gray;
 }
@@ -129,7 +133,7 @@ body, #menu, #content {
 }
 #chart-div {
 	width: 940px;
-	overflow: scroll;
+	overflow: scroll; /* need help */
 }
 #map {
 	/*float:left;*/
