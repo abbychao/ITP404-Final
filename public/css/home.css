@@ -9,18 +9,18 @@ h1 {
 	font-style: italic;
 	font-size: 20px;
 }
-table {
+#results table {
 	margin:auto;
 	width:940px;
 	font-size: 14px;
 	border: none;
 	vertical-align: text-top;
 }
-th {
+#results th {
 	color: #cccccc;
 	border-bottom: #e7ca2b solid thin;
 }
-td {
+#results td {
 	max-width: 200px;
 	min-width: 70px;
 }
