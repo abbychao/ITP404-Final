@@ -12,12 +12,16 @@ h1 {
 table {
 	margin:auto;
 	width:940px;
-	font-size: 13px;
+	font-size: 14px;
 	border: none;
 }
 th {
 	color: #cccccc;
 	border-bottom: #e7ca2b solid thin;
+}
+td {
+	max-width: 200px;
+	min-width: 70px;
 }
 a {
 	color:#cccccc;
