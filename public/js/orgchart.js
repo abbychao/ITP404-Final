@@ -33,9 +33,6 @@ function drawChart() {
         nodeClass: 'node',
         selectedNodeClass: 'selected-node'
       });
-      $('.selected-node').on('click', function() {
-        alert('help');
-      })
     },
     error: function(err1, err2, err3) {
       console.log(err1, err2, err3);

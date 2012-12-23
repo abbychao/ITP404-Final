@@ -125,9 +125,11 @@ body, #menu, #content {
 	background-color: gray;
 	border: solid thin gray;
 }
+.selected-node {
+}
 #chart-div {
 	width: 940px;
-	overflow: auto; /*help*/
+	overflow: scroll;
 }
 #map {
 	/*float:left;*/
