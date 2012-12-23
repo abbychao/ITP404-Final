@@ -114,22 +114,22 @@ class Roster {
 		}
 		else{
 			$desc = "<i>Showing results for...</i><br>";
-			if(!empty($data['query'])) {$desc.="<br>Search Term: ".$data['query']; }
-			if(!empty($data['fname'])) { $desc .= "<br>First Name: ".$data['fname']; }
-			if(!empty($data['lname'])) { $desc .= "<br>Last Name: ".$data['lname']; }
+			if(!empty($data['query'])) {$desc.="<br><label>Search Term:</label> ".$data['query']; }
+			if(!empty($data['fname'])) { $desc .= "<br><label>First Name:</label> ".$data['fname']; }
+			if(!empty($data['lname'])) { $desc .= "<br><label>Last Name:</label> ".$data['lname']; }
 			if(!empty($data['grad_sem_id']) or !empty($data['grad_year'])) { 
-				$desc .= "<br>Graduated: ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
+				$desc .= "<br><label>Graduated:</label> ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
 			}
 			if(!empty($data['pc_sem_id']) or !empty($data['pc_year'])) { 
-				$desc .= "<br>Pledged: ".Roster::getSemById($data['pc_sem_id'])." ".$data['pc_year']; 
+				$desc .= "<br><label>Pledged:</label> ".Roster::getSemById($data['pc_sem_id'])." ".$data['pc_year']; 
 			}
-			if(!empty($data['bigbro_id'])) { $desc .= "<br>Big Bro: ".Roster::getNameById($data['bigbro_id']); }
+			if(!empty($data['bigbro_id'])) { $desc .= "<br><label>Big Bro:</label> ".Roster::getNameById($data['bigbro_id']); }
 			if(!empty($data['family_id']) && $data['family_id'] != 1) { 
-				$desc .= "<br>Family: ".Roster::getFamilyById($data['family_id']); 
+				$desc .= "<br><label>Family:</label> ".Roster::getFamilyById($data['family_id']); 
 			}
-			if(!empty($data['status_id'])) { $desc .= "<br>Status: ".Roster::getStatusById($data['status_id']); }
-			if(!empty($data['industry'])) { $desc .= "<br>Industry: ".$data['industry']; }
-			if(!empty($data['location'])) { $desc .= "<br>Location: ".$data['location']; }
+			if(!empty($data['status_id'])) { $desc .= "<br><label>Status:</label> ".Roster::getStatusById($data['status_id']); }
+			if(!empty($data['industry'])) { $desc .= "<br><label>Industry:</label> ".$data['industry']; }
+			if(!empty($data['location'])) { $desc .= "<br><label>Location:</label> ".$data['location']; }
 			$desc .= "<br>";
 		}
 		return $desc;

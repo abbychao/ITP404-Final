@@ -10,7 +10,7 @@
 		echo '<p><a href="'.URL::to('home/edit').'?bro_id='.$bro->bro_id.'">Edit Profile</a></p>'; 
 	} ?>
 	<div id="profile-left">
-		<img src="<?php echo $bro->photo_url ?>" id='profile-pic'><br>
+		<img src="<?php echo $bro->photo_url ?>" id="profile-pic" ><br>
 	</div>
 	<div id="profile-right">
 		<label>Status:</label>
