@@ -121,7 +121,7 @@ body, #menu, #content {
 	width: 200px;
 }
 .google-visualization-orgchart-table {
-	width:940px;
+	width:940px; /* need help */
 }
 .node {
 	color: #cccccc;

@@ -6,7 +6,7 @@
 	<ul>
 		<li><span id='page_name'>Delta Sigma Pi Roster</span></li>
 		<?php if($_SESSION['loggedin']) { ?>		
-			<li><a href="#">Admin</a>
+			<li><a href="#">My Account</a>
 				<ul>
 						<?php if($_SESSION['admin']['add']) { ?>
 						<li><a href="<?php echo URL::to('home/add') ?>">Add New</a></li>
@@ -16,7 +16,7 @@
 				</ul>
 			</li>
 		<?php } else { ?>
-			<li><a href="<?php echo URL::to('home/admin') ?>">Login</a></li>
+			<li><a href="<?php echo URL::to('home/login') ?>">Login</a></li>
 		<?php } ?>
 		<li><a href="<?php echo URL::to('home/map') ?>">Map</a></li>
 		<li><a href="<?php echo URL::to('home/search') ?>">Search</a>
