@@ -120,7 +120,7 @@ body, #menu, #content {
 #profile-pic {
 	width: 200px;
 }
-tbody {
+.google-visualization-orgchart-table {
 	width:940px;
 }
 .node {
