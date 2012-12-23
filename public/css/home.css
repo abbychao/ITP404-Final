@@ -120,7 +120,7 @@ body, #menu, #content {
 #profile-pic {
 	width: 200px;
 }
-.org-node {
+.node {
 	color: #cccccc;
 	background-color: gray;
 	border: solid thin gray;
