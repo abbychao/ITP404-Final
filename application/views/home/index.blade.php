@@ -13,7 +13,7 @@
 	<div id="results">
 		<table>
 			<th>Name</th><th>Pledge Semester</th><th>Grad Semester</th><th>Status</th>
-			<th>Family</th><th>Big Bro</th><th>Connect</th>
+			<th>Family</th><!-- <th>Big Bro</th> --><th>Industry</th><th>Location</th><th>Connect</th>
 			<?php if($_SESSION['loggedin']) { echo '<th>Action</th>'; } ?>
 			<?php foreach($results as $bro) : ?>
 				<tr>
@@ -44,11 +44,27 @@
 							<?php echo $bro->family_name; ?>
 						</a>
 					</td>
-					<td>
+<!--
+ 					<td>
 						<a href="<?php echo URL::to('home/view').'?bro_id='.$bro->bigbro_id ?>">
 							<?php echo Roster::getNameById($bro->bigbro_id); ?>
 						</a>
-					</td>
+					</td> 
+-->
+					<td><?php
+						if(!empty($bro->industry)) {
+							echo "<a href='".URL::to('home/index')."?from_search=true&industry=".$bro->industry
+							."'>$bro->industry</a>";
+						}
+					?></td>
+					<td><?php
+						if(!empty($bro->location)) {
+							$location_name = trim($bro->location, ' Area');
+							$location_name = trim($location_name, 'Greater ');
+							echo "<a href='".URL::to('home/index')."?from_search=true&location=".$bro->location
+							."'>$location_name</a>";
+						}
+					?></td>
 					<td><?php
 						if(!empty($bro->linkedin)) {
 							echo "<a href='".$bro->linkedin."'>LinkedIn</a>";

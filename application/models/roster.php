@@ -137,7 +137,7 @@ class Roster {
 
 	public static function getOptions() {
 
-		$roster = DB::table('roster')->get();
+		$roster = Roster::all();
 		$semesters = DB::table('semester')->get();
 		$families = DB::table('family')->get();
 		$statuses = DB::table('status')->get();
@@ -156,7 +156,7 @@ class Roster {
 	}
 
 	private static function getOptionsByField($field) {
-		$sql = "SELECT DISTINCT $field AS field FROM roster";
+		$sql = "SELECT DISTINCT $field AS field FROM roster ORDER BY $field ASC";
 		$results = array();
 		$db_results = DB::query($sql);
 		foreach ($db_results as $db_result) {

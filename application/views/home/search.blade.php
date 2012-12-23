@@ -42,13 +42,11 @@
 			<?php endforeach ?>
 		</select><br>
 		Industry:<select name='industry'>
-			<option name='industry' value=''></option>
 			<?php foreach ($options['industries'] as $industry) : ?>
 				<option name='industry' value='<?php echo $industry ?>'><?php echo $industry ?></option>
 			<?php endforeach ?>
 		</select><br>
 		Location:<select name='location'>
-			<option name='location' value=''></option>
 			<?php foreach ($options['locations'] as $location) : ?>
 				<option name='location' value='<?php echo $location ?>'><?php echo $location ?></option>
 			<?php endforeach ?>

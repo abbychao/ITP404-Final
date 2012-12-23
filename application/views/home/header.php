@@ -11,7 +11,7 @@
 						<?php if($_SESSION['admin']['add']) { ?>
 						<li><a href="<?php echo URL::to('home/add') ?>">Add Bro</a></li>
 						<li><a href="<?php echo URL::to('home/edit_all') ?>">Edit Bros</a></li>
-						<li><a href="<?php echo URL::to('home/edit_families') ?>">Manage Families</a></li>
+						<li><a href="<?php echo URL::to('home/edit_families') ?>">Edit Families</a></li>
 						<?php } ?>
 						<li><a href="<?php echo URL::to('home/admin').'?logout=true' ?>">Log out</a></li>
 				</ul>
