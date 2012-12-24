@@ -54,6 +54,7 @@ class Home_Controller extends Base_Controller {
 		return View::make('home.index', $data);
 	}
 
+	// Administrative Functions
 	public function action_login() {
 		session_start();
 		$input = Input::all();
@@ -72,7 +73,6 @@ class Home_Controller extends Base_Controller {
 			'query' => $query,
 			'results' => $roster,
 			'options' => Roster::getOptions()
-
 		);
 
 		if(isset($input['logout'])) {
@@ -89,6 +89,23 @@ class Home_Controller extends Base_Controller {
 		}
 	}
 
+	public function action_transition() {
+		session_start();
+		$data = array(
+			'options' => Roster::getOptions()
+		);
+		return View::make('home.transition', $data);
+	}
+
+	public function action_transition_ajax() {
+		$data = array(
+			'grad_sem_id' => $_REQUEST['grad_sem_id'],
+			'grad_year' => $_REQUEST['grad_year']
+		);
+		echo json_encode(Roster::getByQuery($data));
+	}
+
+	// Core Roster Functions
 	public function action_add() {
 		session_start();
 		$data = array(
@@ -191,6 +208,7 @@ class Home_Controller extends Base_Controller {
 		return View::make('home.view', $data);
 	}
 
+	// Additional Features & Areas of the Site
 	public function action_map() {
 		session_start();
 		$data = array('options' => Roster::getOptions());
@@ -213,12 +231,6 @@ class Home_Controller extends Base_Controller {
 
 	public function action_bigbro_ajax() {
 		echo json_encode(Roster::all());
-	}
-
-	public function action_header() {
-		session_start();
-		$data = array('options' => Roster::getOptions());
-		return View::make('home.header', $data);
 	}
 
 }

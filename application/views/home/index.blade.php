@@ -75,15 +75,30 @@
 							<?php if($_SESSION['admin']['edit']) { ?>
 							<a href="<?php echo URL::to('home/edit') ?>?bro_id=<?php echo $bro->bro_id ?>">Edit</a>
 							<?php } ?>
-							<?php if($_SESSION['admin']['delete']) { ?>
-							<a href="<?php echo URL::to('home/delete') ?>?bro_id=<?php echo $bro->bro_id ?>">Delete</a>
-							<?php } ?>
+							<?php if($_SESSION['admin']['delete']) { 
+								echo '<a class="delete-link" href="'.URL::to('home/delete')
+								.'?bro_id='.$bro->bro_id.'">Delete</a>';
+							} ?>
 						</td>
 					<?php } ?>
 				</tr>
 			<?php endforeach ?>
 		</table>	
 	</div>
+
 	@include('home.footer')
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script>
+		$('a.delete-link').bind('click', function() {
+			return confirm('Are you sure you want to delete this user? This cannot be undone.');
+		});
+		$('#transition').on('click',function() {
+			var confirmed = confirm('Are you sure?\n\nClick "OK" to change all members below to "Alumni" status.');
+			if(confirmed) {
+				// Do something...
+				window.location = '';
+			}
+		});
+	</script>
 </body>
 </html>

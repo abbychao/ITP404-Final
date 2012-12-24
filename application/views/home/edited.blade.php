@@ -10,7 +10,7 @@
 			echo $input['fname'].' '.$input['lname'].' has';
 		}
 		else {
-			echo 'Selected records have'
+			echo 'Selected records have';
 		}
 	?> been edited.</p>
 	<a href="<?php echo URL::to('home/index') ?>">Return to Full Roster.</a></br>

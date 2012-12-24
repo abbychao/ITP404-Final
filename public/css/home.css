@@ -9,25 +9,9 @@ h1 {
 	font-style: italic;
 	font-size: 20px;
 }
-#results table {
-	margin:auto;
-	width:940px;
-	font-size: 14px;
-	border: none;
-	vertical-align: text-top;
-}
-#results th {
-	color: #cccccc;
-	border-bottom: #e7ca2b solid thin;
-}
-#results td {
-	max-width: 200px;
-	min-width: 70px;
-}
 a {
 	color:#cccccc;
 	text-decoration: none;
-	/*font-variant: small-caps;*/
 }
 label, .label {
 	font-weight: bold;
@@ -114,6 +98,26 @@ body, #menu, #content {
 }
 #searchbar input {
 	font-size: 12px;
+}
+#results table, #transition_results table {
+	margin:auto;
+	width:940px;
+	font-size: 14px;
+	border: none;
+}
+#results th, #transition_results th {
+	color: #cccccc;
+	border-bottom: #e7ca2b solid thin;
+	vertical-align: bottom;
+}
+#results td {
+	max-width: 200px;
+	min-width: 70px;
+	vertical-align: top;
+}
+#transition {
+	display: block;
+	float: right;
 }
 #profile-left {
 	float: left;

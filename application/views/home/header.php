@@ -12,8 +12,9 @@
 						<li><a href="<?php echo URL::to('home/add') ?>">Add Bro</a></li>
 						<li><a href="<?php echo URL::to('home/edit_all') ?>">Edit Bros</a></li>
 						<li><a href="<?php echo URL::to('home/edit_families') ?>">Edit Families</a></li>
+						<li><a href="<?php echo URL::to('home/transition') ?>">Transition</a></li>
 						<?php } ?>
-						<li><a href="<?php echo URL::to('home/admin').'?logout=true' ?>">Log out</a></li>
+						<li><a href="<?php echo URL::to('home/login').'?logout=true' ?>">Log out</a></li>
 				</ul>
 			</li>
 		<?php } else { ?>

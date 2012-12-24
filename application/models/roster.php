@@ -119,6 +119,9 @@ class Roster {
 			if(!empty($data['lname'])) { $desc .= "<br><label>Last Name:</label> ".$data['lname']; }
 			if(!empty($data['grad_sem_id']) or !empty($data['grad_year'])) { 
 				$desc .= "<br><label>Graduated:</label> ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
+				if($_SESSION['admin']['edit']) {
+					$desc .= "<div id='transition'><input type='button' value='Transition to Alumni'></div>";
+				}
 			}
 			if(!empty($data['pc_sem_id']) or !empty($data['pc_year'])) { 
 				$desc .= "<br><label>Pledged:</label> ".Roster::getSemById($data['pc_sem_id'])." ".$data['pc_year']; 
