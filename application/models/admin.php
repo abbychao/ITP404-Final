@@ -11,7 +11,8 @@ class Admin {
 				'add' => FALSE,
 				'edit' => FALSE,
 				'delete' => FALSE,
-				'edit_users' => FALSE
+				'edit_users' => FALSE,
+				'edit_structure' => FALSE
 			);
 		}
 	}
@@ -41,16 +42,18 @@ class Admin {
 			'add' => true,
 			'edit' => true,
 			'delete' => true,
-			'edit_users' => true
+			'edit_users' => true,
+			'edit_structure' => true
 		);
 	}
 
 	public static function setMember() {
 		$_SESSION['admin'] = array(
-			'add' => false,
+			'add' => true,
 			'edit' => true,
 			'delete' => false,
-			'edit_users' => false
+			'edit_users' => false,
+			'edit_structure' => false
 		);
 	}
 

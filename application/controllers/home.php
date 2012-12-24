@@ -89,22 +89,6 @@ class Home_Controller extends Base_Controller {
 		}
 	}
 
-	public function action_transition() {
-		session_start();
-		$data = array(
-			'options' => Roster::getOptions()
-		);
-		return View::make('home.transition', $data);
-	}
-
-	public function action_transition_ajax() {
-		$data = array(
-			'grad_sem_id' => $_REQUEST['grad_sem_id'],
-			'grad_year' => $_REQUEST['grad_year']
-		);
-		echo json_encode(Roster::getByQuery($data));
-	}
-
 	// Core Roster Functions
 	public function action_add() {
 		session_start();

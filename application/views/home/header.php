@@ -10,10 +10,14 @@
 				<ul>
 						<?php if($_SESSION['admin']['add']) { ?>
 						<li><a href="<?php echo URL::to('home/add') ?>">Add Bro</a></li>
-						<li><a href="<?php echo URL::to('home/edit_all') ?>">Edit Bros</a></li>
-						<li><a href="<?php echo URL::to('home/edit_families') ?>">Edit Families</a></li>
-						<li><a href="<?php echo URL::to('home/transition') ?>">Transition</a></li>
 						<?php } ?>
+						<?php if($_SESSION['admin']['edit']) { ?>
+						<li><a href="<?php echo URL::to('home/edit_all') ?>">Edit Bros</a></li>
+						<?php } ?>
+						<?php if($_SESSION['admin']['edit_structure']) { ?>
+						<li><a href="<?php echo URL::to('home/edit_families') ?>">Edit Families</a></li>
+						<?php } ?>
+						<li><a href="<?php echo URL::to('home/help') ?>">Admin Help</a></li>
 						<li><a href="<?php echo URL::to('home/login').'?logout=true' ?>">Log out</a></li>
 				</ul>
 			</li>
