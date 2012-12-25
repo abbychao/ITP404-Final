@@ -264,6 +264,7 @@ class Roster {
 				'email' => rtrim($data['email'.$i]),
 				'linkedin' => rtrim($data['linkedin'.$i])
 			));
+			Linkedin::getProfileById($data['bro_id'.$i]);
 		}
 	}
 
