@@ -13,6 +13,7 @@
 						<?php } ?>
 						<?php if($_SESSION['admin']['edit']) { ?>
 						<li><a href="<?php echo URL::to('home/edit_all') ?>">Edit Bros</a></li>
+						<!-- <li><a href="<?php echo URL::to('home/match') ?>">Match LinkedIn</a></li> -->
 						<?php } ?>
 						<?php if($_SESSION['admin']['edit_structure']) { ?>
 						<li><a href="<?php echo URL::to('home/edit_families') ?>">Edit Families</a></li>

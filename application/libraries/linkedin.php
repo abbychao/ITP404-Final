@@ -28,7 +28,8 @@ class Linkedin {
 		$headers = array();
 		$method = OAUTH_HTTP_METHOD_GET;
 		 
-		// By default, the LinkedIn API responses are in XML format. If you prefer JSON, simply specify the format in your call
+		// By default, the LinkedIn API responses are in XML format. 
+		// If you prefer JSON, simply specify the format in your call
 		// $url = "http://api.linkedin.com/v1/people/~?format=json";
 
 		// Make call to LinkedIn to retrieve your own profile
@@ -38,9 +39,7 @@ class Linkedin {
 		$simpleXML = simplexml_load_string($xmlString);
 		$results = array($simpleXML);
 		$results = $results[0];
-		// if(empty($bro->lnkd_updated) or $bro->lnkd_updated > strtotime("-1 week")) {
-			Linkedin::updateProfile($id, $results);
-		// }
+		Linkedin::updateProfile($id, $results);
 		return $results;
 	}
 
@@ -54,6 +53,32 @@ class Linkedin {
 				'lnkd_updated' => time()
 			));
 	}
+
+	// public static function getAccountsByBro($id) {
+	// 	// Specify LinkedIn API endpoint to retrieve your own profile
+	// 	$bro = Roster::getBrother($id);
+	// 	$url = 'http://api.linkedin.com/v1/people-search?&%20first-name='.$bro->bro_fname.'&%20last-name='.$bro->bro_lname;
+
+	// 	$oauth = new OAuth(static::$api_key, static::$secret_key);
+	// 	$oauth->setToken(static::$oauth_token, static::$oauth_key);
+
+	// 	$params = array();
+	// 	$headers = array();
+	// 	$method = OAUTH_HTTP_METHOD_GET;
+		 
+	// 	// By default, the LinkedIn API responses are in XML format. 
+	// 	// If you prefer JSON, simply specify the format in your call
+	// 	// $url = "http://api.linkedin.com/v1/people/~?format=json";
+
+	// 	// Make call to LinkedIn to retrieve your own profile
+	// 	$oauth->fetch($url, $params, $method, $headers);
+		 
+	// 	$xmlString = $oauth->getLastResponse();
+	// 	$simpleXML = simplexml_load_string($xmlString);
+	// 	$results = array($simpleXML);
+	// 	$results = $results[0];	
+	// 	return $results;
+	// }
 
 	// public static function updateAllProfiles() {
 	// 	foreach (Roster::all() as $bro) {

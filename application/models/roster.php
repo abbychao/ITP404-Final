@@ -108,34 +108,62 @@ class Roster {
 		return $results;
 	}
 
-	public static function formatInput($data) {
-		if(empty($data)) {
-			$desc = "<i>Showing all results.</i>";
+	public static function getBrother($id) {
+		if($id == 0) {
+			return null;
 		}
-		else{
-			$desc = "<i>Showing results for...</i><br>";
-			if(!empty($data['query'])) {$desc.="<br><label>Search Term:</label> ".$data['query']; }
-			if(!empty($data['fname'])) { $desc .= "<br><label>First Name:</label> ".$data['fname']; }
-			if(!empty($data['lname'])) { $desc .= "<br><label>Last Name:</label> ".$data['lname']; }
-			if(!empty($data['grad_sem_id']) or !empty($data['grad_year'])) { 
-				$desc .= "<br><label>Graduated:</label> ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
-				if($_SESSION['admin']['edit']) {
-					$desc .= "<div id='transition'><input type='button' value='Transition to Alumni'></div>";
-				}
-			}
-			if(!empty($data['pc_sem_id']) or !empty($data['pc_year'])) { 
-				$desc .= "<br><label>Pledged:</label> ".Roster::getSemById($data['pc_sem_id'])." ".$data['pc_year']; 
-			}
-			if(!empty($data['bigbro_id'])) { $desc .= "<br><label>Big Bro:</label> ".Roster::getNameById($data['bigbro_id']); }
-			if(!empty($data['family_id']) && $data['family_id'] != 1) { 
-				$desc .= "<br><label>Family:</label> ".Roster::getFamilyById($data['family_id']); 
-			}
-			if(!empty($data['status_id'])) { $desc .= "<br><label>Status:</label> ".Roster::getStatusById($data['status_id']); }
-			if(!empty($data['industry'])) { $desc .= "<br><label>Industry:</label> ".$data['industry']; }
-			if(!empty($data['location'])) { $desc .= "<br><label>Location:</label> ".$data['location']; }
-			$desc .= "<br>";
+
+		$query = DB::table('roster')
+			->join('family','roster.family_id','=','family.family_id')
+			->join('status','roster.status_id','=','status.status_id')
+			->join('semester AS grad_sem','roster.grad_sem_id', '=', 'grad_sem.semester_id')
+			->join('semester AS pc_sem', 'roster.pc_sem_id', '=', 'pc_sem.semester_id')
+			->where('bro_id','=', $id);
+			// ->get();
+
+		$results = $query->get(array('roster.*','family_name','status.status_id','status_name',
+			'grad_sem.semester_name AS grad_sem','pc_sem.semester_name AS pc_sem'));
+		$results = $results[0];
+		return $results;
+	}
+
+	// public static function getUnlinkedBros() {
+	// 	$all = Roster::all();
+	// 	$results = array();
+	// 	foreach ($all as $bro) {
+	// 		if(empty($bro->linkedin)) {
+	// 			array_push($results, $bro);
+	// 		}
+	// 	}
+	// 	return $results;
+	// }
+
+	public static function getNameById($id) {
+		$bro = Roster::getBrother($id);
+		if(empty($bro)) {
+			return null;
 		}
-		return $desc;
+		return $bro->bro_fname.' '.$bro->bro_lname;
+	}
+
+	public static function getSemById($id) {
+		if($id == null) {return null;}
+		$results = DB::table('semester')->where('semester_id','=',$id)->get(array('semester_name'));
+		$results = $results[0]->semester_name;
+		return $results;
+	}
+
+	public static function getFamilyById($id) {
+		if($id == null) {return null;}
+		$results = DB::table('family')->where('family_id','=',$id)->get(array('family_name'));
+		$results = $results[0]->family_name;
+		return $results;
+	}
+
+	public static function getStatusById($id) {
+		if($id == null) {return null;}
+		$results = DB::table('status')->where('status_id','=',$id)->get(array('status_name'));
+		return $results[0]->status_name;
 	}
 
 	public static function getOptions() {
@@ -168,51 +196,38 @@ class Roster {
 		return $results;
 	}
 
-	public static function getBrother($id) {
-		if($id == 0) {
-			return null;
+	public static function formatInput($data) {
+		if(empty($data)) {
+			$desc = "<i>Showing all results.</i>";
 		}
-
-		$query = DB::table('roster')
-			->join('family','roster.family_id','=','family.family_id')
-			->join('status','roster.status_id','=','status.status_id')
-			->join('semester AS grad_sem','roster.grad_sem_id', '=', 'grad_sem.semester_id')
-			->join('semester AS pc_sem', 'roster.pc_sem_id', '=', 'pc_sem.semester_id')
-			->where('bro_id','=', $id);
-			// ->get();
-
-		$results = $query->get(array('roster.*','family_name','status.status_id','status_name',
-			'grad_sem.semester_name AS grad_sem','pc_sem.semester_name AS pc_sem'));
-		$results = $results[0];
-		return $results;
-	}
-
-	public static function getNameById($id) {
-		$bro = Roster::getBrother($id);
-		if(empty($bro)) {
-			return null;
+		else{
+			$desc = "<i>Showing results for...</i><br>";
+			if(!empty($data['query'])) {$desc.="<br><label>Search Term:</label> ".$data['query']; }
+			if(!empty($data['fname'])) { $desc .= "<br><label>First Name:</label> ".$data['fname']; }
+			if(!empty($data['lname'])) { $desc .= "<br><label>Last Name:</label> ".$data['lname']; }
+			if(!empty($data['grad_sem_id']) or !empty($data['grad_year'])) { 
+				$desc .= "<br><label>Graduated:</label> ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
+				if($_SESSION['admin']['edit']) {
+					$desc .= "<div id='transition'><input type='button' value='Transition to Alumni'></div>";
+				}
+			}
+			if(!empty($data['pc_sem_id']) or !empty($data['pc_year'])) { 
+				$desc .= "<br><label>Pledged:</label> ".Roster::getSemById($data['pc_sem_id'])." ".$data['pc_year']; 
+			}
+			if(!empty($data['bigbro_id'])) {
+				$desc .= "<br><label>Big Bro:</label> ".Roster::getNameById($data['bigbro_id']); 
+			}
+			if(!empty($data['family_id']) && $data['family_id'] != 1) { 
+				$desc .= "<br><label>Family:</label> ".Roster::getFamilyById($data['family_id']); 
+			}
+			if(!empty($data['status_id'])) { 
+				$desc .= "<br><label>Status:</label> ".Roster::getStatusById($data['status_id']); 
+			}
+			if(!empty($data['industry'])) { $desc .= "<br><label>Industry:</label> ".$data['industry']; }
+			if(!empty($data['location'])) { $desc .= "<br><label>Location:</label> ".$data['location']; }
+			$desc .= "<br>";
 		}
-		return $bro->bro_fname.' '.$bro->bro_lname;
-	}
-
-	public static function getSemById($id) {
-		if($id == null) {return null;}
-		$results = DB::table('semester')->where('semester_id','=',$id)->get(array('semester_name'));
-		$results = $results[0]->semester_name;
-		return $results;
-	}
-
-	public static function getFamilyById($id) {
-		if($id == null) {return null;}
-		$results = DB::table('family')->where('family_id','=',$id)->get(array('family_name'));
-		$results = $results[0]->family_name;
-		return $results;
-	}
-
-	public static function getStatusById($id) {
-		if($id == null) {return null;}
-		$results = DB::table('status')->where('status_id','=',$id)->get(array('status_name'));
-		return $results[0]->status_name;
+		return $desc;
 	}
 
 	public static function add($data) {

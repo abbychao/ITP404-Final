@@ -89,6 +89,15 @@ class Home_Controller extends Base_Controller {
 		}
 	}
 
+	// public function action_match() {
+	// 	session_start();
+	// 	dd(LinkedIn::getAccountsByBro(1));
+	// 	$data = array(
+	// 		'options' => Roster::getOptions()
+	// 	);
+	// 	return View::make('home.match', $data);
+	// }
+
 	// Core Roster Functions
 	public function action_add() {
 		session_start();
