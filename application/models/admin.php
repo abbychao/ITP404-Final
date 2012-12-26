@@ -12,6 +12,7 @@ class Admin {
 				'edit' => FALSE,
 				'delete' => FALSE,
 				'edit_users' => FALSE,
+				'edit_multiple' => FALSE,
 				'edit_structure' => FALSE
 			);
 		}
@@ -29,12 +30,20 @@ class Admin {
 			}
 		}
 		else {
-			$_SESSION['loggedin'] = false;
+			Admin::logout();
 		}
 	}
 
 	public static function logout() {
 		$_SESSION['loggedin'] = false;
+		$_SESSION['admin'] = array(
+			'add' => FALSE,
+			'edit' => FALSE,
+			'delete' => FALSE,
+			'edit_users' => FALSE,
+			'edit_multiple' => FALSE,
+			'edit_structure' => FALSE
+		);
 	}
 
 	public static function setAdmin() {
@@ -43,6 +52,7 @@ class Admin {
 			'edit' => true,
 			'delete' => true,
 			'edit_users' => true,
+			'edit_multiple' => true,
 			'edit_structure' => true
 		);
 	}

@@ -207,7 +207,7 @@ class Roster {
 			if(!empty($data['lname'])) { $desc .= "<br><label>Last Name:</label> ".$data['lname']; }
 			if(!empty($data['grad_sem_id']) or !empty($data['grad_year'])) { 
 				$desc .= "<br><label>Graduated:</label> ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
-				if($_SESSION['admin']['edit']) {
+				if($_SESSION['admin']['edit_multiple']) {
 					$desc .= Admin::getTransitionHTML($data);
 				}
 			}
