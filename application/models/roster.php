@@ -91,16 +91,20 @@ class Roster {
 
 		// from master search form... does not find big bros
 		if(!empty($data['query'])) {
-			$sql .= ' AND (roster.bro_fname LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR roster.bro_lname LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR grad_sem.semester_name LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR roster.grad_year LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR pc_sem.semester_name LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR roster.pc_year LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR family.family_name LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR status.status_name LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR roster.industry LIKE "%'.$data['query'].'%"';
-			$sql .= ' OR roster.location LIKE "%'.$data['query'].'%")';
+			$terms = explode(' ',$data['query']);
+			foreach ($terms as $term) {
+				$sql .= ' AND (roster.bro_fname LIKE "%'.$term.'%"';
+				$sql .= ' OR roster.bro_lname LIKE "%'.$term.'%"';
+				$sql .= ' OR grad_sem.semester_name LIKE "%'.$term.'%"';
+				$sql .= ' OR roster.grad_year LIKE "%'.$term.'%"';
+				$sql .= ' OR pc_sem.semester_name LIKE "%'.$term.'%"';
+				$sql .= ' OR roster.pc_year LIKE "%'.$term.'%"';
+				$sql .= ' OR family.family_name LIKE "%'.$term.'%"';
+				$sql .= ' OR status.status_name LIKE "%'.$term.'%"';
+				$sql .= ' OR roster.industry LIKE "%'.$term.'%"';
+				$sql .= ' OR roster.location LIKE "%'.$term.'%")';
+			}
+
 		}
 
 		$sql .= ' ORDER BY status_id ASC, bro_lname ASC';
