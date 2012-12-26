@@ -190,6 +190,17 @@ class Home_Controller extends Base_Controller {
 		return View::make('home.search', $data);
 	}
 
+	public function action_transition() {
+		session_start();
+		$input = Input::all();
+		Roster::transitionByGradSem($input);
+		$data = array(
+			'input' => $input,
+			'options' => Roster::getOptions()
+		);
+		return View::make('home.transition', $data);
+	}
+
 	public function action_view() {
 		session_start();
 		$bro_id = $_REQUEST['bro_id'];

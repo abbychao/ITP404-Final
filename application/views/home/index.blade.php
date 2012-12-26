@@ -93,11 +93,7 @@
 			return confirm('Are you sure you want to delete this user? This cannot be undone.');
 		});
 		$('#transition').on('click',function() {
-			var confirmed = confirm('Are you sure?\n\nClick "OK" to change all members below to "Alumni" status.');
-			if(confirmed) {
-				// Do something...
-				window.location = '';
-			}
+			return confirm('Are you sure?\n\nClick "OK" to change all members below to "Alumni" status.');
 		});
 	</script>
 </body>

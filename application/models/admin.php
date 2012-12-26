@@ -57,4 +57,17 @@ class Admin {
 		);
 	}
 
+	public static function getTransitionHTML($data) {
+		$content = "
+			<div id='transition'>
+				<form action='".URL::to('home/transition')."' method='post'>
+				<input type='hidden' name='grad_sem_id' value='".$data['grad_sem_id']."'>
+				<input type='hidden' name='grad_year' value='".$data['grad_year']."'>
+				<input type='submit' value='Transition to Alumni'>
+				</form>
+			</div>
+		";
+		return $content;
+	}
+
 }

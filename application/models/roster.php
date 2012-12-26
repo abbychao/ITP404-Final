@@ -208,7 +208,7 @@ class Roster {
 			if(!empty($data['grad_sem_id']) or !empty($data['grad_year'])) { 
 				$desc .= "<br><label>Graduated:</label> ".Roster::getSemById($data['grad_sem_id'])." ".$data['grad_year'];
 				if($_SESSION['admin']['edit']) {
-					$desc .= "<div id='transition'><input type='button' value='Transition to Alumni'></div>";
+					$desc .= Admin::getTransitionHTML($data);
 				}
 			}
 			if(!empty($data['pc_sem_id']) or !empty($data['pc_year'])) { 
@@ -254,8 +254,7 @@ class Roster {
 	public static function edit($data) {
 		// dd($data);
 		DB::table('roster')
-			->where('bro_id','=',$data['bro_id'])
-			->update(array(
+			->where('bro_id','=',$data['bro_id'])->update(array(
 				'bro_fname' => $data['fname'],
 				'bro_lname' => $data['lname'],
 				'grad_sem_id' => $data['grad_sem_id'],
@@ -274,7 +273,7 @@ class Roster {
 	}
 
 	public static function editAll($data) {
-		for ($i=0; $i < count(Roster::all()) ; $i++) { 
+		for ($i=0; $i < count(Roster::all()); $i++) { 
 			DB::table('roster')->where('bro_id','=',$data['bro_id'.$i])->update(array(
 				'email' => rtrim($data['email'.$i]),
 				'linkedin' => rtrim($data['linkedin'.$i])
@@ -285,6 +284,15 @@ class Roster {
 
 	public static function delete($id) {
 		DB::table('roster')->where('bro_id','=',$id)->delete();
+	}
+
+	public static function transitionByGradSem($data) {
+		$bros = Roster::getByQuery($data);
+		foreach ($bros as $bro) {
+			DB::table('roster')->where('bro_id','=',$bro->bro_id)->update(array(
+				'status_id' => 2
+			));
+		}
 	}
 
 }
