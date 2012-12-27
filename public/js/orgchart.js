@@ -3,7 +3,7 @@ google.setOnLoadCallback(drawChart);
 function drawChart() {
 
   $.ajax({
-    url: '../../public/home/family_ajax',
+    url: '../home/family_ajax',
     data: {
       family_id: global_family_id // TO BE UPDATED
     },
@@ -16,7 +16,7 @@ function drawChart() {
 
       var i = 0;
       while(response[i] != null) {
-        var content = "<a href='http://dsp.pagodabox.com/public/home/view?bro_id="+response[i].bro_id+"'>";
+        var content = "<a href='../home/view?bro_id="+response[i].bro_id+"'>";
         content += response[i].bro_fname+' '+response[i].bro_lname+'</a>';
         content +='<br>'+response[i].pc_sem+' '+response[i].pc_year+'</font>';
         var bigbro_id = response[i].bigbro_id;

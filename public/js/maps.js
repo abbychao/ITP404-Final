@@ -15,7 +15,7 @@
 
 
 	$.ajax({
-		url: '../../public/home/map_ajax',
+		url: '../home/map_ajax',
 		data: {
 			// user: user
 		},
