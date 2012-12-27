@@ -111,17 +111,17 @@ class Home_Controller extends Base_Controller {
 		session_start();
 
 		$input = Input::all();
-		$rules = array(
-			'fname' => 'required',
-			'lname' => 'required',
-			'pc_year' => 'integer|between:1922,3000',
-			'grad_year' => 'integer|between:1922,3000',
-			'linkedin' => 'active_url'
-		);
-		$validation = Validator::make($input, $rules);
-		if($validation->fails()) {
-			return Redirect::to('home.add')->with_errors($validation);
-		}
+		// $rules = array(
+		// 	'fname' => 'required',
+		// 	'lname' => 'required',
+		// 	'pc_year' => 'integer|between:1922,3000',
+		// 	'grad_year' => 'integer|between:1922,3000',
+		// 	'linkedin' => 'active_url'
+		// );
+		// $validation = Validator::make($input, $rules);
+		// if($validation->fails()) {
+		// 	return Redirect::to('home.add')->with_errors($validation);
+		// }
 
 		Roster::add($input);
 		$data = array(
