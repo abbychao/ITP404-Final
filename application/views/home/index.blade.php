@@ -59,8 +59,8 @@
 					?></td>
 					<td><?php
 						if(!empty($bro->location)) {
-							$location_name = str_replace($bro->location, ' Area', '');
-							$location_name = str_replace($location_name, 'Greater ', '');
+							$location_name = str_replace('Greater ','',$bro->location);
+							$location_name = str_replace(' Area','',$location_name);
 							echo "<a href='".URL::to('home/index')."?from_search=true&location=".$bro->location
 							."'>$location_name</a>";
 						}
