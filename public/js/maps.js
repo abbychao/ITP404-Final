@@ -25,18 +25,16 @@
 			locations = getLocations(response);
 			while(locations[i] != null){
 				if(locations[i] != null) {
+					var address = locations[i].replace('Greater ','').replace(' Area','');	
 					var members = getMembersAtLocation(response, locations[i]);
-					var content = "<div><font color='black'>";
-					content += locations[i]+": "+countObj(members)+" people here.";
+					var content = "<div><font color='black'><b>";
+					content += address+"</b> ("+countObj(members)+" people)";
 					var j = 0;
 					while(members[j] != null) {
 						content += '<br>- ' + members[j].bro_fname + ' ' + members[j].bro_lname;
 						j++;
 					}
 					content += "</font></div>";
-
-					var address = locations[i].replace('Greater ','');
-					address = address.replace(' Area','');	
 
 					(function(content) {
 						$.ajax({

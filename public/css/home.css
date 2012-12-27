@@ -99,13 +99,13 @@ body, #menu, #content {
 #searchbar input {
 	font-size: 12px;
 }
-#results table, #transition_results table {
+#results table {
 	margin:auto;
 	width:940px;
 	font-size: 14px;
 	border: none;
 }
-#results th, #transition_results th {
+#results th {
 	color: #cccccc;
 	border-bottom: #e7ca2b solid thin;
 	vertical-align: bottom;

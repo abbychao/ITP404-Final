@@ -89,14 +89,11 @@ class Home_Controller extends Base_Controller {
 		}
 	}
 
-	// public function action_match() {
-	// 	session_start();
-	// 	dd(LinkedIn::getAccountsByBro(1));
-	// 	$data = array(
-	// 		'options' => Roster::getOptions()
-	// 	);
-	// 	return View::make('home.match', $data);
-	// }
+	public function action_help() {
+		session_start();
+		$data = array('options' => Roster::getOptions());
+		return View::make('home.help',$data);
+	}
 
 	// Core Roster Functions
 	public function action_add() {
@@ -125,10 +122,10 @@ class Home_Controller extends Base_Controller {
 
 		Roster::add($input);
 		$data = array(
-			'input' => $input,
+			'message' => Message::added($input),
 			'options' => Roster::getOptions()
 		);
-		return View::make('home.added', $data);
+		return View::make('home.message', $data);
 	}
 
 	public function action_edit() {
@@ -146,15 +143,14 @@ class Home_Controller extends Base_Controller {
 		$input = Input::all();
 		Roster::edit($input);
 		$data = array(
-			'input' => $input,
+			'message' => Message::edited($input),
 			'options' => Roster::getOptions()
 		);
-		return View::make('home.edited', $data);
+		return View::make('home.message', $data);
 	}
 
 	public function action_edit_all() {
 		session_start();
-
 		$data = array(
 			'results' => Roster::all(),
 			'options' => Roster::getOptions()
@@ -168,20 +164,20 @@ class Home_Controller extends Base_Controller {
 		$input = Input::all();
 		Roster::editAll($input);
 		$data = array(
-			'input' => $input,
+			'message' => Message::edited($input),
 			'options' => Roster::getOptions()
 		);
-		return View::make('home.edited',$data);
+		return View::make('home.message',$data);
 	}
 
 	public function action_delete() {
 		session_start();
 		$data = array(
-			'name' => Roster::getNameById($_REQUEST['bro_id']),
+			'message' => Message::deleted($_REQUEST['bro_id']),
 			'options' => Roster::getOptions()
 		);
 		Roster::delete($_REQUEST['bro_id']);
-		return View::make('home.delete', $data);
+		return View::make('home.message', $data);
 	}
 
 	public function action_search() {
@@ -195,10 +191,10 @@ class Home_Controller extends Base_Controller {
 		$input = Input::all();
 		Roster::transitionByGradSem($input);
 		$data = array(
-			'input' => $input,
+			'message' => Message::transitioned($input),
 			'options' => Roster::getOptions()
 		);
-		return View::make('home.transition', $data);
+		return View::make('home.message', $data);
 	}
 
 	public function action_view() {

@@ -5,8 +5,7 @@
 </head>
 <body>
 	@include('home.header')
-	<p>Success! <?php echo $input['fname'].' '.$input['lname'] ?> has been added.</p>
-	<a href="<?php echo URL::to('home/add') ?>">Add Another.</a><br>
+	<div id='message'><?php echo $message ?></div>
 	<a href="<?php echo URL::to('home/index') ?>">Return to Full Roster.</a></br>
 	@include('home.footer')
 </body>
