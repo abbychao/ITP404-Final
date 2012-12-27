@@ -27,7 +27,7 @@
 				if(locations[i] != null) {
 					var members = getMembersAtLocation(response, locations[i]);
 					var content = "<div><font color='black'>";
-					content += "In "+locations[i]+", there are "+countObj(members)+" people.";
+					content += locations[i]+": "+countObj(members)+" people here.";
 					var j = 0;
 					while(members[j] != null) {
 						content += '<br>- ' + members[j].bro_fname + ' ' + members[j].bro_lname;
