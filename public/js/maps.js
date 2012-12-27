@@ -40,6 +40,9 @@
 						$.ajax({
 							url: '../TinyGeocoder/create-api.php?q='+address,
 							success: function(response) {
+								if(response.indexOf(",") == -1) {
+									console.log(response);
+								}
 								var point = response.split(',');
 								var latlng = new google.maps.LatLng(point[0],point[1]);
 								var marker = new google.maps.Marker({
