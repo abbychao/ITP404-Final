@@ -25,13 +25,14 @@
 			while(locations[i] != null){
 				if(locations[i] != null) {
 					var members = getMembersAtLocation(response, locations[i]);
-					var content = "<div><font color='black'>There are "+countObj(members)+" people here.";
+					var content = "<div><font color='black'>";
+					content += "In "+locations[i]+", there are "+countObj(members)+" people.";
 					var j = 0;
 					while(members[j] != null) {
 						content += '<br>- ' + members[j].bro_fname + ' ' + members[j].bro_lname;
 						j++;
 					}
-					content += '</font></div>'
+					content += "</font></div>";
 
 					var geocoder = new google.maps.Geocoder();
 					param1 = {
@@ -92,7 +93,7 @@
 			}
 			i++;
 		}
-		console.log(results);
+		// console.log(results);
 		return results;
 	}
 
