@@ -129,20 +129,22 @@ body, #menu, #content {
 #profile-pic {
 	width: 200px;
 }
-.google-visualization-orgchart-table {
-	width:940px; /* need help */
-}
 .node {
-	color: #cccccc;
+	color: black;
 	border-radius: 5px;
 	background-color: gray;
-	border: solid thin gray;
+	border: solid thin black;
 }
 .selected-node {
 }
+.google-visualization-orgchart-table {
+	font-size: 14px;
+}
 #chart-div {
 	width: 940px;
-	overflow: scroll; /* need help */
+	overflow: scroll;
+	border: solid thin #e7ca2b;
+	border-bottom: none;
 }
 #map {
 	/*float:left;*/

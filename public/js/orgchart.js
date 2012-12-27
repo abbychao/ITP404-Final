@@ -27,7 +27,7 @@ function drawChart() {
         i++;
       }
       
-      var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.OrgChart(document.getElementById('chart-div'));
       chart.draw(data, {
         allowHtml:true,
         nodeClass: 'node',

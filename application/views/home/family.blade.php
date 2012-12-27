@@ -6,8 +6,7 @@
 <body>
 	@include('home.header')
 	<h1><?php echo Roster::getFamilyById(Input::get('family_id')) ?></h1>
-    <div id='chart_div'></div>
-    <a href="<?php echo URL::to('home/index') ?>">Return to Full Roster.</a></br>
+    <div id='chart-div'></div>
 
 	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
