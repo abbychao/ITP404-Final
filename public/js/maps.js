@@ -6,7 +6,7 @@
 	var los_angeles = new google.maps.LatLng(points.los_angeles[0], points.los_angeles[1]);
 
 	var myOptions = {
-		zoom: 4,
+		zoom: 2,
 		center: los_angeles, // takes a LatLng object
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
