@@ -24,7 +24,7 @@
 			var i = 0;
 			locations = getLocations(response);
 			while(locations[i] != null){
-				if(locations[i] != null) {
+				if(locations[i] != '') {
 					var address = locations[i].replace('Greater ','').replace(' Area','');	
 					var members = getMembersAtLocation(response, locations[i]);
 					var content = "<div><font color='black'><b>";
@@ -40,8 +40,8 @@
 						$.ajax({
 							url: '../TinyGeocoder/create-api.php?q='+address,
 							success: function(response) {
-								if(response.indexOf(",") == -1) {
-									console.log(response);
+								if(response.indexOf(",") == -1) { // if error
+									console.log(content, response);
 								}
 								var point = response.split(',');
 								var latlng = new google.maps.LatLng(point[0],point[1]);
