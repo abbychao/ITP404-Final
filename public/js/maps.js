@@ -7,10 +7,11 @@
 
 	var myOptions = {
 		zoom: 2,
-		center: los_angeles, // takes a LatLng object
+		center: los_angeles,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 	var map = new google.maps.Map(document.getElementById('map'), myOptions);
+	var infowindow = new google.maps.InfoWindow();
 
 
 	$.ajax({
@@ -35,7 +36,7 @@
 					content += "</font></div>";
 
 					var address = locations[i].replace('Greater ','');
-					address = address.replace(' Area','');
+					address = address.replace(' Area','');	
 
 					(function(content) {
 						$.ajax({
@@ -46,10 +47,8 @@
 								var marker = new google.maps.Marker({
 									position: latlng
 								});
-								var infowindow = new google.maps.InfoWindow({
-									content: content
-								});
 								google.maps.event.addListener(marker,'click',function() {
+									infowindow.setContent(content);
 									infowindow.open(map, marker);
 								})
 								marker.setMap(map);
