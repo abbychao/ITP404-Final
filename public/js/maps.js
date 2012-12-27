@@ -38,7 +38,7 @@
 
 					(function(content) {
 						$.ajax({
-							url: '../../TinyGeocoder-master/create-api.php?q='+address,
+							url: '../../bundles/TinyGeocoder/create-api.php?q='+address,
 							success: function(response) {
 								var point = response.split(',');
 								var latlng = new google.maps.LatLng(point[0],point[1]);
