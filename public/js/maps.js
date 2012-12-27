@@ -14,7 +14,7 @@
 
 
 	$.ajax({
-		url: 'http://dsp.pagodabox.com/public/home/map_ajax',
+		url: '../../public/home/map_ajax',
 		data: {
 			// user: user
 		},
@@ -34,28 +34,28 @@
 					}
 					content += "</font></div>";
 
-					var geocoder = new google.maps.Geocoder();
-					param1 = {
-						address: locations[i]
-					};
+					var address = locations[i].replace('Greater ','');
+					address = address.replace(' Area','');
 
 					(function(content) {
-						geocoder.geocode(param1, function(results, status) {	
-							if (results.length > 0) {
-								var latlng = results[0].geometry.location;
-
+						$.ajax({
+							url: '../../TinyGeocoder-master/create-api.php?q='+address,
+							success: function(response) {
+								var point = response.split(',');
+								var latlng = new google.maps.LatLng(point[0],point[1]);
 								var marker = new google.maps.Marker({
-									position: latlng,
-									title: locations[i]
+									position: latlng
 								});
 								var infowindow = new google.maps.InfoWindow({
-								    content: content
+									content: content
 								});
-								
-								google.maps.event.addListener(marker, 'click', function() {
+								google.maps.event.addListener(marker,'click',function() {
 									infowindow.open(map, marker);
-								});
+								})
 								marker.setMap(map);
+							},
+							error: function(err1, err2, err3) {
+								console.log(err1, err2, err3);
 							}
 						});
 					})(content)
@@ -86,14 +86,11 @@
 
 		var i = 0;
 		while(members[i] != null) {
-			//console.log(members[i].location);
-			//console.log($.inArray(members[i].location, location))
 			if(members[i].location != '' && location.indexOf(members[i].location) != -1) {
 				results.push(members[i]);
 			}
 			i++;
 		}
-		// console.log(results);
 		return results;
 	}
 
