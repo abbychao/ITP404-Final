@@ -31,7 +31,8 @@
 					content += address+"</b> ("+countObj(members)+" people)";
 					var j = 0;
 					while(members[j] != null) {
-						content += '<br>- ' + members[j].bro_fname + ' ' + members[j].bro_lname;
+						content += '<br>- <a href="../home/view?bro+id=' + members[j].bro_id + '">';
+						content += members[j].bro_fname + ' ' + members[j].bro_lname + '</a>';
 						j++;
 					}
 					content += "</font></div>";

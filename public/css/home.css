@@ -152,6 +152,9 @@ body, #menu, #content {
 	width:940px;
 	/*width: 500px;*/
 }
+#map a {
+	color: gray;
+}
 #map-sidebar {
 	float:left;
 	height:400px;
