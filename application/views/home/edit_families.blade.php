@@ -6,7 +6,6 @@
 <body>
 	@include('home.header')
 	<h1>Manage Families</h1>
-	<a href='<?php echo URL::to_asset('css/home.css') ?>'>Link</a>
 	Please select one of the following options:
 	<div id="accordion">
 		<div class="title">Add New Family</div>
