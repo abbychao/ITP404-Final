@@ -99,6 +99,21 @@ body, #menu, #content {
 #searchbar input {
 	font-size: 12px;
 }
+#accordion .title {
+	border: thin solid gray;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 5px;
+	font-style: italic;
+}
+#accordion .content {
+	padding-left:10px;
+}
+.columns {
+	columns: 4;
+	-webkit-columns: 4; /* Safari and Chrome */
+	-moz-columns: 4; /* Firefox */
+}
 #results table {
 	margin:auto;
 	width:940px;

@@ -55,5 +55,6 @@
 	@include('home.footer')
 	<script type="text/javascript" src="<?php echo URL::to_asset('js/jquery-1.8.3.js') ?>"></script>
 	<script type="text/javascript" src="<?php echo URL::to_asset('js/jquery-ui-1.9.2.custom.js') ?>"></script>
-	<script type="text/javascript" src="<?php echo URL::to_asset('js/autocomplete.js') ?>"></script></body>
+	<script type="text/javascript" src="<?php echo URL::to_asset('js/autocomplete.js') ?>"></script>
+</body>
 </html>

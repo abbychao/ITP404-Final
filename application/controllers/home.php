@@ -31,6 +31,7 @@ class Home_Controller extends Base_Controller {
 	*/
 
 	public function action_index() {
+		// dd((bool)DB::table('roster')->where('family_id','=',13)->get());
 		// Facebook::getInfoByUser('abbyc');
 		session_start();
 		$input = Input::all();
@@ -54,7 +55,7 @@ class Home_Controller extends Base_Controller {
 		return View::make('home.index', $data);
 	}
 
-	// Administrative Functions
+	// Administrative & Account Functions
 	public function action_login() {
 		session_start();
 		$input = Input::all();
@@ -206,6 +207,48 @@ class Home_Controller extends Base_Controller {
 			'options' => Roster::getOptions()
 		);
 		return View::make('home.view', $data);
+	}
+
+	// Family Roster Functions
+	public function action_edit_families() {
+		session_start();
+		$data = array('options' => Roster::getOptions());
+		return View::make('home.edit_families', $data);
+	}
+
+	public function action_add_family() {
+		session_start();
+		$input = Input::all();
+		Roster::addFamily($input['new_family_name']);
+		$data = array(
+			'message' => Message::familyAdded($input['new_family_name']),
+			'options' => Roster::getOptions()
+		);
+		return View::make('home.message', $data);	
+	}
+
+	public function action_edit_family_names() {
+		session_start();
+		$input = Input::all();
+		Roster::editFamilies($input);
+		$data = array(
+			'message' => Message::familiesEdited(),
+			'options' => Roster::getOptions()
+		);
+		return View::make('home.message', $data);	
+		}
+
+	public function action_merge_families() {
+		session_start();
+		$input = Input::all();
+		$family_name1 = Roster::getFamilyById($input[0]);
+		$family_name2 = Roster::getFamilyById($input[1]);
+		Roster::mergeFamilies($input[0], $input[1]);
+		$data = array(
+			'message' => Message::familiesMerged($family_name1, $family_name2),
+			'options' => Roster::getOptions()
+		);
+		return View::make('home.message',$data);
 	}
 
 	// Additional Features & Areas of the Site

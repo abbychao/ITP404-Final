@@ -174,7 +174,7 @@ class Roster {
 
 		$roster = Roster::all();
 		$semesters = DB::table('semester')->get();
-		$families = DB::table('family')->get();
+		$families = DB::table('family')->order_by('family_name', 'ASC')->get();
 		$statuses = DB::table('status')->get();
 		$industries = Roster::getOptionsByField('industry');
 		$locations = Roster::getOptionsByField('location');
@@ -236,7 +236,7 @@ class Roster {
 
 	public static function add($data) {
 		// dd($data);
-		$success = DB::table('roster')->insert_get_id(array(
+		DB::table('roster')->insert_get_id(array(
 			'bro_fname' => $data['fname'],
 			'bro_lname' => $data['lname'],
 			'grad_sem_id' => $data['grad_sem_id'],
@@ -252,7 +252,6 @@ class Roster {
 		// if($data['linkedin']) {
 		// 	Linkedin::getProfileById('');
 		// }
-		return $success;
 	}
 
 	public static function edit($data) {
@@ -297,6 +296,33 @@ class Roster {
 				'status_id' => 2
 			));
 		}
+	}
+
+	public static function addFamily($family_name) {
+		DB::table('family')->insert_get_id(array('family_name' => $family_name));
+	}
+
+	public static function editFamilies($data) {
+		for ($i=0; $i < count($data)/2; $i++) { 
+			DB::table('family')->where('family_id','=',$data['family_id'.$i])->update(array(
+				'family_name' => $data['family_name'.$i]
+			));
+		}
+	}
+
+	public static function mergeFamilies($id1, $id2) {
+		// Transfer brothers from family 2 to family 1
+		DB::table('roster')->where('family_id', '=', $id2)->update(array('family_id' => $id1));
+
+		// Check that no brothers are remaining
+		if(!DB::table('roster')->where('family_id','=',$id2)->get()) {
+			// Delete family 2
+			DB::table('family')->where('family_id','=',$id2)->delete();
+		}
+		else {
+			dd(DB::table('roster')->where('family_id','=',$id2));
+		}
+
 	}
 
 }

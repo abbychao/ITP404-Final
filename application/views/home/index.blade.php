@@ -87,7 +87,7 @@
 	</div>
 
 	@include('home.footer')
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php echo URL::to_asset('js/jquery-1.8.3.js') ?>"></script>
 	<script>
 		$('a.delete-link').bind('click', function() {
 			return confirm('Are you sure you want to delete this user? This cannot be undone.');
