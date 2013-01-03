@@ -18,7 +18,7 @@ function drawChart() {
       while(response[i] != null) {
         var content = "<a href='../home/view?bro_id="+response[i].bro_id+"'>";
         content += response[i].bro_fname+' '+response[i].bro_lname+'</a>';
-        content += '<br>P: '+response[i].pc_sem+' '+response[i].pc_year+
+        content += '<br>P: '+response[i].pc_sem+' '+response[i].pc_year;
         content += ' | G: '+response[i].grad_sem+' '+response[i].grad_year+'</font>';
         var bigbro_id = response[i].bigbro_id;
         if(bigbro_id == 0) {bigbro_id = null;}
