@@ -6,6 +6,11 @@
 <body>
 	@include('home.header')
 	<h1><?php echo Roster::getFamilyById(Input::get('family_id')) ?></h1>
+	<div class='right'>Show by:
+	<select id='show'>
+		<option value='pledge'>Pledge Class</option>
+		<option value='grad'>Graduation Class</option>
+	</select></div>
     <div id='chart-div'></div>
 
 	<script type='text/javascript' src='https://www.google.com/jsapi'></script>

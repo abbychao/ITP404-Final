@@ -1,5 +1,6 @@
 google.load('visualization', '1', {packages:['orgchart']});
 google.setOnLoadCallback(drawChart);
+$('#show').change(drawChart);
 function drawChart() {
 
   $.ajax({
@@ -18,8 +19,15 @@ function drawChart() {
       while(response[i] != null) {
         var content = "<a href='../home/view?bro_id="+response[i].bro_id+"'>";
         content += response[i].bro_fname+' '+response[i].bro_lname+'</a>';
-        content += '<br>P: '+response[i].pc_sem+' '+response[i].pc_year;
-        content += ' | G: '+response[i].grad_sem+' '+response[i].grad_year+'</font>';
+        if($('#show option:selected').val() == 'pledge') {
+          content += '<br>'+response[i].pc_sem+' '+response[i].pc_year;
+        }
+        else if($('#show option:selected').val() == 'grad') {
+          content += '<br>'+response[i].grad_sem+' '+response[i].grad_year+'</font>';
+        }
+        else {
+          console.log($('#show option:selected').val());
+        }
         var bigbro_id = response[i].bigbro_id;
         if(bigbro_id == 0) {bigbro_id = null;}
         data.addRows([

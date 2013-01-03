@@ -27,6 +27,9 @@ body, #menu, #content {
 	width:940px;
 	margin:auto
 }
+.right {
+	float:right;
+}
 #footer {
 	height:40px;
 	width:940px;
