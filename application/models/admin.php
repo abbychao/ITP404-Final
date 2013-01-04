@@ -63,6 +63,7 @@ class Admin {
 			'edit' => true,
 			'delete' => false,
 			'edit_users' => false,
+			'edit_multiple' => false,
 			'edit_structure' => false
 		);
 	}
