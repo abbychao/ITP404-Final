@@ -11,7 +11,7 @@
 						<?php if($_SESSION['admin']['add']) { ?>
 						<li><a href="<?php echo URL::to('home/add') ?>">Add Bro</a></li>
 						<?php } ?>
-						<?php if($_SESSION['admin']['edit']) { ?>
+						<?php if($_SESSION['admin']['edit_multiple']) { ?>
 						<li><a href="<?php echo URL::to('home/edit_all') ?>">Edit Bros</a></li>
 						<!-- <li><a href="<?php echo URL::to('home/match') ?>">Match LinkedIn</a></li> -->
 						<?php } ?>
